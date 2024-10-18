@@ -17,6 +17,7 @@ namespace FitTrack
         public MainWindow()
         {
             InitializeComponent();
+            DataContext=new MainWindowMVVM();
         }
     }
 }
