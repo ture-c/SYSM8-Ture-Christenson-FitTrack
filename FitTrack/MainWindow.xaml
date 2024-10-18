@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="MainWindow" Width="450" Height="800" >
     <Grid>
-        <StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <TextBlock Text="FitTrack"
                        Width="250" Height="100"
                        FontSize="50" 
@@ -15,21 +15,43 @@
                        TextAlignment="Center"
                        Foreground="Crimson" 
                        FontWeight="Bold"/>
-            <TextBox Text="{Binding Username, 
-                UpdateSourceTrigger=PropertyChanged}"
-                     Width="150" Height="20"
-                     Foreground="Crimson"
-                     />
-            
-            <TextBox Text="{Binding Password, 
-                UpdateSourceTrigger=PropertyChanged}"
-                     Width="150" Height="20" 
-                     Foreground="Crimson"
-                     />
-            <Button Width="75" Height="20" Content="Log In" BorderBrush="Crimson" Background="Crimson" Foreground="White"/>
-            <Button Width="75" Height="20" Content="New User" BorderBrush="White" Background="Crimson" Foreground="White"/>
-        </StackPanel>
-        
 
+            <TextBox x:Name="UserNameTextBox"
+                     Text="Username"
+                     Width="200" Height="20"
+                     Foreground="Crimson"
+                     BorderBrush="Crimson"
+                     />
+
+            
+            <PasswordBox x:Name="PasswordBox"
+                         Width="200" Height="20" 
+                         Foreground="Crimson"
+                         BorderBrush="Crimson"
+                         PasswordChanged="PasswordBox_PasswordChanged"/>
+
+            <Button Width="75" Height="20"
+                    BorderBrush="White" 
+                    Background="Crimson"
+                    Foreground="White"
+                    x:Name="LogInbtn"
+                    Content="Log In"
+                    Click="LogInbtn_Click"/>
+
+            <Button Width="75" Height="20" 
+                    BorderBrush="White"
+                    Background="Crimson" 
+                    Foreground="White" 
+                    x:Name="NewUserbtn"
+                    Content="Register"
+                    Click="NewUserbtn_Click"/>
+
+            <Button x:Name="ForgotP" Width="100" Height="20"
+                    Background="LightGray"
+                    Foreground="Crimson"
+                    Content="Forgot Password?"
+                    Click="ForgotP_Click"
+                    BorderBrush="Transparent"/>
+        </StackPanel>
     </Grid>
 </Window>
