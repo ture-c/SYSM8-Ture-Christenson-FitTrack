@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Configuration;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,8 +13,12 @@ using System.Windows.Shapes;
 
 namespace FitTrack
 {
+    public static class UserData
+    {
+        public static string Username { get; set; }
+        public static string Password { get; set; }
+    }
 
-    
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -27,9 +32,12 @@ namespace FitTrack
             string username = UserNameTextBox.Text;
             string password = PasswordBox.Password;
 
-            if (username == "admin" && password == "123")
+            if (username == UserData.Username && password == UserData.Password)
             {
-                //Ny sida
+                WorkoutsWindow workoutwin = new WorkoutsWindow();
+                workoutwin.Show();
+                this.Close();
+
             }
             else
             {
@@ -43,11 +51,7 @@ namespace FitTrack
                     NewUserWindow newuserwindow = new NewUserWindow(); 
 
                     newuserwindow.Show();
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-           
+                    this.Close();
         }
 
         private void ForgotP_Click(object sender, RoutedEventArgs e)
