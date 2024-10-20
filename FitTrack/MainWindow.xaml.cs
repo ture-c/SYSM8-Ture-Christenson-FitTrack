@@ -36,7 +36,7 @@ namespace FitTrack
             {
                 WorkoutsWindow workoutwin = new WorkoutsWindow();
                 workoutwin.Show();
-                this.Close();
+                this.Hide();
 
             }
             else
@@ -53,6 +53,14 @@ namespace FitTrack
                     newuserwindow.Show();
                     this.Close();
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = sender as PasswordBox;
+            string password = passwordBox.Password;
+        }
+
+
 
         private void ForgotP_Click(object sender, RoutedEventArgs e)
         {
