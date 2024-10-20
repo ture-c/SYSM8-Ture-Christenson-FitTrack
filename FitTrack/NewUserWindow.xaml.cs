@@ -30,9 +30,11 @@ namespace FitTrack
         {
             List<string> countryselect = new List<string>
             {
-                "United States", "Canada",
+                "United States", 
+                "Canada",
                 "United Kingdom",
-                "France", "China",
+                "France", 
+                "China",
                 "Norway",
                 "Sweden",
                 "Denmark",

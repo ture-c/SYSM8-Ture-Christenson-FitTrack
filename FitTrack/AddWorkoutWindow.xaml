@@ -1,4 +1,4 @@
-﻿<Window x:Class="FitTrack.AddWorkoutWindow"
+﻿<Window x:Class="FitTrack.AddWorkoutWindow" Background="Crimson"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,37 @@
         mc:Ignorable="d"
         Title="AddWorkoutWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGray" >
+
+            <Label Content="Workout Type:" />
+            <ComboBox x:Name="WorkoutTypeComboBox"
+                      Width="200" Height="50" >
+                <ComboBoxItem Content="Running"/>
+                <ComboBoxItem Content="Yoga"/>
+                <ComboBoxItem Content="Swimming"/>
+                <ComboBoxItem Content="Cycling"/>
+                <ComboBoxItem Content="Basketball"/>
+                <ComboBoxItem Content="Football"/>
+                <ComboBoxItem Content="Golf"/>
+                <ComboBoxItem Content="Tennis"/>
+                
+
+            </ComboBox>
+            <Label Content="Duration:"/>
+            <TextBox x:Name="DurationInput"
+                     Width="200" Height="50"
+                     />
+            <Label Content="Calories:" />
+            <TextBox x:Name="CaloriesBurnedInput"
+                     Width="200" Height="50"
+                     />
+                <Label Content="Notes (Optional):"/>
+                <TextBox x:Name="NotesInput"
+            Width="200" Height="50" 
+                     />
+            <Button Content="Save" Width="200" Height="50" Click="Button_Click" />
+
+
+        </StackPanel>
     </Grid>
 </Window>
