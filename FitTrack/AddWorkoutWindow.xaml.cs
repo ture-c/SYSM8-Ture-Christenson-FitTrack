@@ -33,6 +33,7 @@ namespace FitTrack
 
         public void SaveWorkout()
         {
+            DateTime dateInput = DateTime.Parse(DateInput.Text);
             string workoutType = WorkoutTypeComboBox.Text;
             TimeSpan duration = TimeSpan.FromMinutes(double.Parse(DurationInput.Text)); 
             int caloriesBurned = int.Parse(CaloriesBurnedInput.Text); 
@@ -47,12 +48,12 @@ namespace FitTrack
             if (workoutType == "Cardio")
             {
                 distance = int.Parse(DistanceInput.Text); 
-                work = new CardioWorkout(workoutType, notes, duration, caloriesBurned, distance);
+                work = new CardioWorkout(dateInput, workoutType, notes, duration, caloriesBurned, distance);
             }
             else
             {
                 repetitions = int.Parse(RepetitionsInput.Text); 
-                work = new StrengthWorkout(workoutType, notes, duration, caloriesBurned, repetitions);
+                work = new StrengthWorkout(dateInput, workoutType, notes, duration, caloriesBurned, repetitions);
             }
 
             MessageBox.Show("Workout saved successfully.");

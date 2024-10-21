@@ -8,10 +8,10 @@
             <ComboBoxItem Content="Repetitions"/>
         </ComboBox>
 
+        <TextBox x:Name="DateInput" Text="Date" />
         <TextBox Name="DurationInput"  Text="Duration (min)" />
         <TextBox Name="CaloriesBurnedInput"  Text="Calories Burned"/>
         <TextBox Name="DistanceInput" Text="Distance (m)"/>
-       
         <TextBox Name="RepetitionsInput"  Text="Repetitions"/>
      
         <TextBox Name="NotesInput" Text="Notes"/>

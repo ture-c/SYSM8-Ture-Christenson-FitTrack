@@ -10,14 +10,16 @@ namespace FitTrack
     {
         public abstract class Workout
         {
+            public DateTime Date { get; set; }
             public string Type { get; set; }
             public string Notes { get; set; }
             public TimeSpan Duration { get; set; }
 
             public int Calories { get; set; }
 
-            public Workout(string type, string notes, TimeSpan duration, int calories)
+            public Workout(DateTime date, string type, string notes, TimeSpan duration, int calories)
             {
+                Date = date;
                 Type = type;
                 Notes = notes;
                 Duration = duration;
@@ -30,8 +32,8 @@ namespace FitTrack
         {
             public int Distance { get; set; }
 
-            public CardioWorkout(string type, string notes, TimeSpan duration, int calories, int distance)
-        : base(type, notes, duration, calories)
+            public CardioWorkout(DateTime date, string type, string notes, TimeSpan duration, int calories, int distance)
+        : base(date, type, notes, duration, calories)
             {
                 Distance = distance;
             }
@@ -47,8 +49,8 @@ namespace FitTrack
         {
             public int Repetitions { get; set; }
 
-            public StrengthWorkout(string type, string notes, TimeSpan duration, int calories, int repetitions)
-        : base(type, notes, duration, calories)
+            public StrengthWorkout(DateTime date, string type, string notes, TimeSpan duration, int calories, int repetitions)
+        : base(date,type, notes, duration, calories)
             {
                 Repetitions = Repetitions;
             }
