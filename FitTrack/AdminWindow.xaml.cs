@@ -15,27 +15,13 @@ using System.Windows.Shapes;
 namespace FitTrack
 {
     /// <summary>
-    /// Interaction logic for AddWorkoutWindow.xaml
+    /// Interaction logic for AdminWindow.xaml
     /// </summary>
-    public partial class AddWorkoutWindow : Window
+    public partial class AdminWindow : Window
     {
-        public AddWorkoutWindow()
+        public AdminWindow()
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            SaveWorkout();
-        }
-
-
-
-        public void SaveWorkout()
-        {
-
-
-        }
     }
- }
+}

@@ -17,10 +17,10 @@ namespace FitTrack
     /// <summary>
     /// Interaction logic for NewUserWindow.xaml
     /// </summary>
-    public partial class NewUserWindow : Window
+    public partial class RegisterWindow : Window
     {
         private string userPassword = "";
-        public NewUserWindow()
+        public RegisterWindow()
         {
             InitializeComponent();
             RegisterNewUser();
@@ -46,7 +46,6 @@ namespace FitTrack
                         return;
                     }
                     string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
-                    string numbersCharacters = "1234567890";
             
                     foreach (char c in password)
 
@@ -102,6 +101,7 @@ namespace FitTrack
                 "Angola",
 
             };
+            
             CountryComboBox.ItemsSource = countryselect;
             countryselect.Sort();
 

@@ -17,10 +17,6 @@ namespace FitTrack
 {
     public partial class WorkoutsWindow : Window
     {
-        public string UserNameInput { get; set; }
-        public string PasswordInput { get; set; }
-        public string ConfirmPasswordInput { get; set; }
-        public string CountryCombobox { get; set; }
 
         public ObservableCollection<Workout> WorkoutList { get; set; }
 
@@ -72,23 +68,23 @@ namespace FitTrack
         {
 
         }
-    }
 
-
-    public class Workout
-    {
-        public string Type { get; set; }
-        public string Notes { get; set; }
-        public TimeSpan Duration { get; set; }
-
-        public int Calories { get; set; }
-
-        public Workout(string type, string notes, TimeSpan duration, int calories)
+        private void Infobtn_Click(object sender, RoutedEventArgs e)
         {
-            Type = type;
-            Notes = notes;
-            Duration = duration;
-            Calories = calories;
+
         }
+
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        
     }
+
+
+
+
+
+    
 }

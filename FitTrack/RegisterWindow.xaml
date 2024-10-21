@@ -1,11 +1,11 @@
-﻿<Window x:Class="FitTrack.NewUserWindow"
+﻿<Window x:Class="FitTrack.RegisterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack"
         mc:Ignorable="d"
-        Title="NewUserWindow" Width="450" Height="800" Background="LightGray">
+        Title="RegisterWindow" Width="450" Height="800" Background="LightGray">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Welcome, new user!" FontWeight="Bold" FontFamily="Arial" Foreground="Crimson" FontSize="30" />

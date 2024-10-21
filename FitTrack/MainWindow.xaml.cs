@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static FitTrack.AddWorkoutWindow;
 
 namespace FitTrack
 {
@@ -17,6 +18,9 @@ namespace FitTrack
     {
         public static string Username { get; set; }
         public static string Password { get; set; }
+
+        public static string Country { get; set; }
+       
     }
 
     public partial class MainWindow : Window
@@ -29,9 +33,9 @@ namespace FitTrack
 
         public void Register()
         {
-            NewUserWindow newuserwindow = new NewUserWindow();
+            RegisterWindow registerwindow = new RegisterWindow();
 
-            newuserwindow.Show();
+            registerwindow.Show();
             this.Close();
 
         }
@@ -47,6 +51,14 @@ namespace FitTrack
                 this.Hide();
 
             }
+            else if (username == "admin" && password == "password")
+            {
+                AdminWindow adminWindow = new AdminWindow();
+                adminWindow.Show();
+                this.Hide();
+            }
+                
+
             else
             {
                 MessageBox.Show("Invalid username or password.");
