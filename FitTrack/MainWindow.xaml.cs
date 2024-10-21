@@ -53,6 +53,8 @@ namespace FitTrack
             }
             else if (username == "admin" && password == "password")
             {
+                WorkoutsWindow workoutwin = new WorkoutsWindow();
+                workoutwin.Show();
                 AdminWindow adminWindow = new AdminWindow();
                 adminWindow.Show();
                 this.Hide();

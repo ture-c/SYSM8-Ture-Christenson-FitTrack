@@ -11,12 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static FitTrack.Workout1;
 
 namespace FitTrack
 {
-    /// <summary>
-    /// Interaction logic for AddWorkoutWindow.xaml
-    /// </summary>
+
     public partial class AddWorkoutWindow : Window
     {
         public AddWorkoutWindow()
@@ -34,8 +33,30 @@ namespace FitTrack
 
         public void SaveWorkout()
         {
+            string workoutType = WorkoutTypeComboBox.Text;
+            TimeSpan duration = TimeSpan.FromMinutes(double.Parse(DurationInput.Text)); 
+            int caloriesBurned = int.Parse(CaloriesBurnedInput.Text); 
+            string notes = NotesInput.Text; 
 
+            Workout work;
 
+            
+            int distance = 0;
+            int repetitions = 0;
+
+            if (workoutType == "Cardio")
+            {
+                distance = int.Parse(DistanceInput.Text); 
+                work = new CardioWorkout(workoutType, notes, duration, caloriesBurned, distance);
+            }
+            else
+            {
+                repetitions = int.Parse(RepetitionsInput.Text); 
+                work = new StrengthWorkout(workoutType, notes, duration, caloriesBurned, repetitions);
+            }
+
+            MessageBox.Show("Workout saved successfully.");
+            this.Close();
         }
     }
- }
+}

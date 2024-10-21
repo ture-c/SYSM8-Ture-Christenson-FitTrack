@@ -34,11 +34,11 @@ namespace FitTrack
             string password = userPassword;
             string confirmPassword = ConfirmPasswordBox.Password;
 
-                    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-                    {
-                        MessageBox.Show("Username and password cannot be empty.");
-                        return;
-                    }
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+              MessageBox.Show("Username and password cannot be empty.");
+                return;                  
+            }                
 
                     if (password.Length < 8)
                     {
@@ -58,7 +58,7 @@ namespace FitTrack
                     {
                         MessageBox.Show("Passwords do not match.");
                         return;
-                    }
+                    }        
 
             
 

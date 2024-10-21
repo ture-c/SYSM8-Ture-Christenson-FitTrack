@@ -18,17 +18,13 @@ namespace FitTrack
     public partial class WorkoutsWindow : Window
     {
 
-        public ObservableCollection<Workout> WorkoutList { get; set; }
 
         public WorkoutsWindow()
         {
             InitializeComponent();
 
             
-            WorkoutList = new ObservableCollection<Workout>
-            {
-                
-            };
+            
 
             DataContext = this;
         }
@@ -45,16 +41,7 @@ namespace FitTrack
         
         private void RemoveWorkout_Click(object sender, RoutedEventArgs e)
         {
-            if (workoutDataGrid.SelectedItem != null)
-            {
-                Workout selectedWorkout = (Workout)workoutDataGrid.SelectedItem;
-                WorkoutList.Remove(selectedWorkout); 
-                MessageBox.Show("Workout removed!");
-            }
-            else
-            {
-                MessageBox.Show("Please select a workout to remove.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            
         }
 
         
