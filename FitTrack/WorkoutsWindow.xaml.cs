@@ -17,7 +17,11 @@ namespace FitTrack
 {
     public partial class WorkoutsWindow : Window
     {
-        
+        public string UserNameInput { get; set; }
+        public string PasswordInput { get; set; }
+        public string ConfirmPasswordInput { get; set; }
+        public string CountryCombobox { get; set; }
+
         public ObservableCollection<Workout> WorkoutList { get; set; }
 
         public WorkoutsWindow()
@@ -40,7 +44,7 @@ namespace FitTrack
             addworkoutwin.Show();
 
 
-        }
+        } 
 
         
         private void RemoveWorkout_Click(object sender, RoutedEventArgs e)
@@ -60,30 +64,31 @@ namespace FitTrack
         
         private void OpenDetails_Click(object sender, RoutedEventArgs e)
         {
-            if (workoutDataGrid.SelectedItem != null)
-            {
-                Workout selectedWorkout = (Workout)workoutDataGrid.SelectedItem;
-                MessageBox.Show($"Workout Details:\nName: {selectedWorkout.Name}\nDescription: {selectedWorkout.Description}\nTime: {selectedWorkout.Time} mins", "Workout Details");
-            }
-            else
-            {
-                MessageBox.Show("Please select a workout to view details.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            
+        }
+
+
+        private void userdetails_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 
-    
+
     public class Workout
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double Time { get; set; }
+        public string Type { get; set; }
+        public string Notes { get; set; }
+        public TimeSpan Duration { get; set; }
 
-        public Workout(string name, string description, double time)
+        public int Calories { get; set; }
+
+        public Workout(string type, string notes, TimeSpan duration, int calories)
         {
-            Name = name;
-            Description = description;
-            Time = time;
+            Type = type;
+            Notes = notes;
+            Duration = duration;
+            Calories = calories;
         }
     }
 }

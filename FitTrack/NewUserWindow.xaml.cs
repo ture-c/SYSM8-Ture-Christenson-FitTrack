@@ -23,17 +23,73 @@ namespace FitTrack
         public NewUserWindow()
         {
             InitializeComponent();
+            RegisterNewUser();
             SelectCountries();
+        }
+
+
+        public void RegisterNewUser()
+        {
+            string username = UsernameTextBox.Text;
+            string password = userPassword;
+            string confirmPassword = ConfirmPasswordBox.Password;
+
+                    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                    {
+                        MessageBox.Show("Username and password cannot be empty.");
+                        return;
+                    }
+
+                    if (password.Length < 8)
+                    {
+                        MessageBox.Show("Password must be at least 8 characters.");
+                        return;
+                    }
+                    string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+                    string numbersCharacters = "1234567890";
+            
+                    foreach (char c in password)
+
+                        if (!specialCharacters.Contains(c) && !password.Any(char.IsDigit))
+                       {
+                        MessageBox.Show("Password must contain at least one special character and one number.");
+                        return;
+                        }
+                    if (password != confirmPassword)
+                    {
+                        MessageBox.Show("Passwords do not match.");
+                        return;
+                    }
+
+            
+
+
+
+
+            UserData.Username = username;
+             UserData.Password = password;
+
+             MessageBox.Show("User registered successfully!");
+
+             UsernameTextBox.Clear();
+             PasswordBox.Clear();
+             ConfirmPasswordBox.Clear();
+
+             MainWindow loginwindow = new MainWindow();
+             loginwindow.Show();
+             this.Close();              
+
+
         }
 
         private void SelectCountries()
         {
             List<string> countryselect = new List<string>
             {
-                "United States", 
+                "United States",
                 "Canada",
                 "United Kingdom",
-                "France", 
+                "France",
                 "China",
                 "Norway",
                 "Sweden",
@@ -51,72 +107,26 @@ namespace FitTrack
 
         }
 
+
+
+        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterNewUser();
+        }
+
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox passwordBox = sender as PasswordBox;
             userPassword = passwordBox.Password;
         }
 
-        private void AddUserBtn_Click(object sender, RoutedEventArgs e)
+        private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            string username = UsernameTextBox.Text;
-            string password = userPassword;
-
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Username and password cannot be empty.");
-                return;
-            }
-
-            if (password.Length < 8)
-            {
-                MessageBox.Show("Password must be at least 8 characters.");
-                return;
-            }
-
-            if (!HasSpecialCharacter(password) || !HasNumber(password))
-            {
-                MessageBox.Show("Password must contain at least one special character and one number.");
-                return;
-            }
+           
 
 
-            UserData.Username = username;
-            UserData.Password = password;
 
-            MessageBox.Show("User registered successfully!");
-            
-            MainWindow loginwindow = new MainWindow();
-            loginwindow.Show();
-            this.Close();
-            
         }
-            private bool HasSpecialCharacter(string password)
-            {
-                string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+    }
 
-                foreach (char c in password)
-                {
-                    if (specialCharacters.Contains(c))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-
-            }
-            private bool HasNumber(string password)
-            {
-                foreach (char c in password)
-                {
-                    if (char.IsDigit(c))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-    
-    }    
-    
 }

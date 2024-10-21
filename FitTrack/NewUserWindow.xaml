@@ -15,12 +15,15 @@
 
             <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"
                          Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
-
+            <PasswordBox x:Name="ConfirmPasswordBox" 
+                         PasswordChanged="ConfirmPasswordBox_PasswordChanged"
+                         Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson"
+                         />
             <ComboBox x:Name="CountryComboBox" Text="Select Country"
                       Width="200" Height="20" Background="Crimson" />
 
-            <Button x:Name="AddUserBtn" Click="AddUserBtn_Click"
-                    Content="Add" Width="50" Height="30" Background="Crimson" Foreground="White"
+            <Button x:Name="RegisterBtn" Click="RegisterBtn_Click"
+                    Content="Register" Width="100" Height="30" Background="Crimson" Foreground="White"
                     FontSize="20" FontFamily="Arial"/>
         </StackPanel>
     </Grid>

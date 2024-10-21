@@ -24,14 +24,6 @@ namespace FitTrack
             InitializeComponent();
         }
 
-
-
-        public void SaveWorkout()
-        {
-
-            
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -41,6 +33,16 @@ namespace FitTrack
 
           SaveWorkout();  
         }
+
+
+
+        public void SaveWorkout()
+        {
+
+            
+        }
+
+        
     }
 
 }

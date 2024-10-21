@@ -24,10 +24,18 @@ namespace FitTrack
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
-        private void LogInbtn_Click(object sender, RoutedEventArgs e)
+        public void Register()
+        {
+            NewUserWindow newuserwindow = new NewUserWindow();
+
+            newuserwindow.Show();
+            this.Close();
+
+        }
+        public void SignIn()
         {
             string username = UserNameTextBox.Text;
             string password = PasswordBox.Password;
@@ -43,16 +51,19 @@ namespace FitTrack
             {
                 MessageBox.Show("Invalid username or password.");
             }
-        }
-    
 
-        private void NewUserbtn_Click(object sender, RoutedEventArgs e)
-        {
-                    NewUserWindow newuserwindow = new NewUserWindow(); 
-
-                    newuserwindow.Show();
-                    this.Close();
         }
+
+
+
+        private void LogInbtn_Click(object sender, RoutedEventArgs e) { SignIn(); }
+        
+            
+       
+
+
+        private void NewUserbtn_Click(object sender, RoutedEventArgs e) { Register(); }
+        
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -68,6 +79,6 @@ namespace FitTrack
             //forgotwin.Show();
 
         }
-        
+
     }
 }

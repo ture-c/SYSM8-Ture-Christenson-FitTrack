@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Width="450" Height="800" >
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  >
             <TextBlock Text="FitTrack"
                        Width="250" Height="100"
                        FontSize="50" 
