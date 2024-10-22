@@ -38,16 +38,17 @@ namespace FitTrack
         }
         public void SignIn()
         {
-            string username = UserNameTextBox.Text;
-            string password = PasswordBox.Password;
-
-            if (thisPerson != null)
-            {
-                thisPerson.SignIn(username, password, this);
-            }
+            
 
 
         }
+
+
+
+    
+
+
+    
 
 
 

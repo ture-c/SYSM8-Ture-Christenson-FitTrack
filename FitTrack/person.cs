@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using static FitTrack.Person1;
+using System.Diagnostics.Metrics;
+using System.Runtime.ConstrainedExecution;
 
 namespace FitTrack
 { 
@@ -31,7 +34,7 @@ namespace FitTrack
                     WorkoutsWindow workoutwin = new WorkoutsWindow();
                     workoutwin.Show();
                     mainWindow.Hide();
-
+                     
                 }
                 else
                 {
@@ -107,7 +110,9 @@ namespace FitTrack
                     MessageBox.Show("Passwords do not match.");
                     return;
                 }
-
+                User newUser = new User(username, password, Country, SecurityQuestion, SecurityAnswer); 
+                
+                
 
 
                 MainWindow mainWindow = new MainWindow();
