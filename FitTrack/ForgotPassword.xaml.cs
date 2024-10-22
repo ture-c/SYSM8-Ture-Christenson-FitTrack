@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 namespace FitTrack
 {
     /// <summary>
-    /// Interaction logic for AdminWindow.xaml
+    /// Interaction logic for ForgotPassword.xaml
     /// </summary>
-    public partial class AdminWindow : Window
+    public partial class ForgotPassword : Window
     {
-        public AdminWindow()
+        public ForgotPassword()
         {
             InitializeComponent();
         }
+
     }
 }

@@ -11,25 +11,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static FitTrack.AddWorkoutWindow;
+using static FitTrack.Person1;
 
 namespace FitTrack
 {
-    public static class UserData
-    {
-        public static string Username { get; set; }
-        public static string Password { get; set; }
-
-        public static string Country { get; set; }
-       
-    }
+    
 
     public partial class MainWindow : Window
     {
+        private Person thisPerson;
         public MainWindow()
         {
             InitializeComponent();
 
+         
         }
+
 
         public void Register()
         {
@@ -44,38 +41,17 @@ namespace FitTrack
             string username = UserNameTextBox.Text;
             string password = PasswordBox.Password;
 
-            if (username == UserData.Username && password == UserData.Password)
+            if (thisPerson != null)
             {
-                WorkoutsWindow workoutwin = new WorkoutsWindow();
-                workoutwin.Show();
-                this.Hide();
+                thisPerson.SignIn(username, password, this);
+            }
 
-            }
-            else if (username == "admin" && password == "password")
-            {
-                WorkoutsWindow workoutwin = new WorkoutsWindow();
-                workoutwin.Show();
-                AdminWindow adminWindow = new AdminWindow();
-                adminWindow.Show();
-                this.Hide();
-            }
-                
-
-            else
-            {
-                MessageBox.Show("Invalid username or password.");
-            }
 
         }
 
 
 
         private void LogInbtn_Click(object sender, RoutedEventArgs e) { SignIn(); }
-        
-            
-       
-
-
         private void NewUserbtn_Click(object sender, RoutedEventArgs e) { Register(); }
         
 
@@ -89,8 +65,8 @@ namespace FitTrack
 
         private void ForgotP_Click(object sender, RoutedEventArgs e)
         {
-            //NewForgetPWindow forgotwin = new NewForgetPWindow();
-            //forgotwin.Show();
+            ForgotPassword forgotwin = new ForgotPassword();
+            forgotwin.Show();
 
         }
 

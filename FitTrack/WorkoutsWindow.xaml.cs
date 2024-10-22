@@ -53,7 +53,9 @@ namespace FitTrack
 
         private void userdetails_Click(object sender, RoutedEventArgs e)
         {
-
+            UserDetailsWindow userdetailswindow = new UserDetailsWindow();
+            userdetailswindow.Show();
+            this.Close();
         }
 
         private void Infobtn_Click(object sender, RoutedEventArgs e)

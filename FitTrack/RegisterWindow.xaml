@@ -12,15 +12,23 @@
 
             <TextBox x:Name="UsernameTextBox" Text="Username"
                      Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
-
+            <Label Content="Password" HorizontalAlignment="Center"/>
             <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"
-                         Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
+                 Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
+            <Label Content="Confirm Password" HorizontalAlignment="Center"/>
             <PasswordBox x:Name="ConfirmPasswordBox" 
                          PasswordChanged="ConfirmPasswordBox_PasswordChanged"
                          Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson"
                          />
+            <Label Content="Select Country" HorizontalAlignment="Center" />
             <ComboBox x:Name="CountryComboBox" Text="Select Country"
                       Width="200" Height="20" Background="Crimson" />
+            <Label Content="Ask A Question:" HorizontalAlignment="Center" />
+            <TextBox x:Name="SecurityQuestionTextBox" 
+          Width="200" Height="20" Foreground="Crimson" />
+            <Label Content="What Is The Answer?:" HorizontalAlignment="Center" />
+            <TextBox x:Name="SecurityAnswerTextBox" 
+          Width="200" Height="20" Foreground="Crimson" />
 
             <Button x:Name="RegisterBtn" Click="RegisterBtn_Click"
                     Content="Register" Width="100" Height="30" Background="Crimson" Foreground="White"
