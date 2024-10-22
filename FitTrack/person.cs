@@ -26,30 +26,20 @@ namespace FitTrack
 
 
             }
-            public virtual void SignIn(string username, string password, MainWindow mainWindow)
+            public virtual void SignIn(string username, string password)
             {
                 
-                if (Username == username && Password == password)
-                {
-                    WorkoutsWindow workoutwin = new WorkoutsWindow();
-                    workoutwin.Show();
-                    mainWindow.Hide();
-                     
-                }
-                else
-                {
-                    MessageBox.Show("Invalid username or password.");
-                }
             }
-            
+
+
 
 
         }
         public class User : Person
         {
-            public string Country { get; set; }
-            public string SecurityQuestion { get; set; }
-            public string SecurityAnswer { get; set; }
+            public string Country { get; private set; }
+            public string SecurityQuestion { get; private set; }
+            public string SecurityAnswer { get; private set; }
 
 
             public User(string username, string password, string country, string SecurityQuestion, string SecurityAnswer) 
@@ -60,65 +50,12 @@ namespace FitTrack
                 this.SecurityAnswer = SecurityAnswer;
             }
 
-            
 
-
-
-            public void RegisterUser(RegisterWindow registerwindow, string confirmPassword)
+            public override void SignIn(string username, string password)
             {
-                string username = registerwindow.UsernameTextBox.Text;
-                string password = registerwindow.PasswordBox.Password;
                 
-            
-                    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-                    {
-                    MessageBox.Show("Username and password cannot be empty.");
-                    return;
-                    }
-
-                    if (password.Length < 8)
-                    {
-                    MessageBox.Show("Password must be at least 8 characters.");
-                    return;
-                    }
-                string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
-                bool hasSpecialChar = false;
-                bool hasNum = false;
-
-                foreach (char c in password)
-                {
-                    if (specialCharacters.Contains(c))
-                    {
-                        hasSpecialChar = true;
-                    }
-                    if (char.IsDigit(c))
-                    {
-                        hasNum = true;
-                    }
-
-                }
-                if (!hasSpecialChar || !hasNum)
-                {
-                    MessageBox.Show("Must contain a number and special character.");
-                }
-
-                    
-
-
-                if (password != confirmPassword)
-                {
-                    MessageBox.Show("Passwords do not match.");
-                    return;
-                }
-                User newUser = new User(username, password, Country, SecurityQuestion, SecurityAnswer); 
-                
-                
-
-
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-                registerwindow.Close();
             }
+
 
             public void ResetPassword()
             {

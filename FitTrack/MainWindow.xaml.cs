@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows;
@@ -15,16 +16,15 @@ using static FitTrack.Person1;
 
 namespace FitTrack
 {
-    
-
+   
     public partial class MainWindow : Window
     {
-        private Person thisPerson;
+        private Person person;
         public MainWindow()
         {
             InitializeComponent();
 
-         
+            person = new Person1.User("admin", "testtest123-", "Country", "What is your favorite color?", "Blue");
         }
 
 
@@ -34,25 +34,38 @@ namespace FitTrack
 
             registerwindow.Show();
             this.Close();
-
-        }
-        public void SignIn()
-        {
             
 
-
+        }
+        public void SignIn(string username, string password)
+        {
+            foreach (User user in RegisterWindow.ActiveUsers)
+            {
+                if (user.Username == username && user.Password == password)
+                {
+                    
+                    MessageBox.Show("Login successful!");
+                   
+                    WorkoutsWindow workoutwindow = new WorkoutsWindow();
+                    workoutwindow.Show();
+                    this.Close();
+                }
+            }
+            MessageBox.Show("Wrong username or password.");
         }
 
 
 
-    
-
-
-    
 
 
 
-        private void LogInbtn_Click(object sender, RoutedEventArgs e) { SignIn(); }
+      private void LogInbtn_Click(object sender, RoutedEventArgs e) 
+        {
+            string username = UserNameTextBox.Text; 
+            string password = PasswordBox.Password; 
+
+            SignIn(username, password);
+        }
         private void NewUserbtn_Click(object sender, RoutedEventArgs e) { Register(); }
         
 
