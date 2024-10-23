@@ -32,20 +32,23 @@ namespace FitTrack
         {
             List<string> countryselect = new List<string>
             {
-                "United States",
-                "Canada",
-                "United Kingdom",
-                "France",
-                "China",
-                "Norway",
-                "Sweden",
-                "Denmark",
-                "Germany",
-                "North Korea",
-                "Christmas Island",
-                "Burkina Faso",
-                "Yemen",
-                "Angola",
+                "Austria", "Belgium", 
+                "Bulgaria", "Croatia", 
+                "Cyprus", "Czech Republic", 
+                "Denmark", "Estonia", 
+                "Finland", "France",
+                "Germany", "Greece",
+                "Hungary", "Ireland",
+                "Italy", "Latvia", 
+                "Lithuania", "Luxembourg",
+                "Malta", "Netherlands", 
+                "Poland", "Portugal", 
+                "Romania", "Slovakia", 
+                "Slovenia", "Spain",
+                "Sweden", "Iceland", 
+                "Liechtenstein",
+                "Norway", "Switzerland"
+
 
             };
 
@@ -62,7 +65,7 @@ namespace FitTrack
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
             string country = CountryComboBox.SelectedItem?.ToString();
-            string securityQuestion = SecurityQuestionTextBox.Text;
+            string securityQuestion = SecurityQuestionCombobox.SelectedItem?.ToString();
             string securityAnswer = SecurityAnswerTextBox.Text;
 
 

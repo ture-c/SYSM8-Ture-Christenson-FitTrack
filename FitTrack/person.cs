@@ -57,35 +57,54 @@ namespace FitTrack
             }
 
 
-            public void ResetPassword()
+            public bool ResetPassword(string username, string answer, string newPassword)
             {
-                if (SecurityQuestion == SecurityAnswer)
+                
+                foreach (User user in RegisterWindow.ActiveUsers)
                 {
-
+                    if (SecurityAnswer == answer && Username == username)
+                    {
+                        Password = newPassword;
+                        MessageBox.Show("Reset successful!");
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong username or answer.");
+                        return false;
+                    }
+                    
                 }
+                MessageBox.Show("Wrong Username Or Answer.");
+                return false;
+
+
+
             }
 
 
-        
-
-            
 
 
 
-            //public class AdminUser : Person
-            //{
-            //    public override void SignIn()
-            //    {
-            //        return;
-            //    }
 
-            //    public void ManageAllWorkouts()
-            //    {
 
-            //        return;
-            //    }
 
-            //}
+            public class AdminUser : User
+            {
+                public AdminUser(string username, string password, string country, string SecurityQuestion, string SecurityAnswer)
+                : base(username, password, SecurityAnswer, SecurityQuestion, country)
+                {
+                        
+                }
+                
+
+                public void ManageAllWorkouts()
+                {
+
+                    return;
+                }
+
+            }
 
         }
     }

@@ -19,12 +19,12 @@ namespace FitTrack
    
     public partial class MainWindow : Window
     {
-        private Person person;
+        
         public MainWindow()
         {
             InitializeComponent();
 
-            person = new Person1.User("admin", "testtest123-", "Country", "What is your favorite color?", "Blue");
+            //person = new Person1.User("admin", "testtest123-", "Country", "What is your favorite color?", "Blue");
         }
 
 

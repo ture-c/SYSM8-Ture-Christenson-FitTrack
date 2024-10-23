@@ -22,10 +22,15 @@
                          />
             <Label Content="Select Country" HorizontalAlignment="Center" />
             <ComboBox x:Name="CountryComboBox" Text="Select Country"
-                      Width="200" Height="20" Background="Crimson" />
+                      Width="220" Height="20" Background="Crimson" />
             <Label Content="Ask A Question:" HorizontalAlignment="Center" />
-            <TextBox x:Name="SecurityQuestionTextBox" 
-          Width="200" Height="20" Foreground="Crimson" />
+            <ComboBox x:Name="SecurityQuestionCombobox" Width="220" Height="20" Foreground="Crimson" >
+                    <ComboBoxItem Content="What is your mothers name?" />
+                    <ComboBoxItem Content="What was your first school called?" />
+                    <ComboBoxItem Content="What is your pets name?" />
+                    
+            </ComboBox>
+
             <Label Content="What Is The Answer?:" HorizontalAlignment="Center" />
             <TextBox x:Name="SecurityAnswerTextBox" 
           Width="200" Height="20" Foreground="Crimson" />
