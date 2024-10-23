@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,19 +13,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel; //Lade till Objectmodel
 
 namespace FitTrack
 {
     public partial class WorkoutsWindow : Window
     {
-
+        public ObservableCollection<Workout1.Workout> WorkoutList { get; set; }
 
         public WorkoutsWindow()
         {
             InitializeComponent();
 
-            
-            
+            WorkoutList = new ObservableCollection<Workout1.Workout>();
+
 
             DataContext = this;
         }
@@ -32,7 +34,7 @@ namespace FitTrack
         
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
         {
-            AddWorkoutWindow addworkoutwin = new AddWorkoutWindow();
+            AddWorkoutWindow addworkoutwin = new AddWorkoutWindow(this);
             addworkoutwin.Show();
 
 
@@ -41,6 +43,19 @@ namespace FitTrack
         
         private void RemoveWorkout_Click(object sender, RoutedEventArgs e)
         {
+            var selectedWorkout = workoutDataGrid.SelectedItem as Workout1.Workout;
+            if (selectedWorkout != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to remove?",
+                     "Confirm Delete", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    WorkoutList.Remove(selectedWorkout);
+                }
+                else { MessageBox.Show("Please select a workout you want to remove"); }
+
+            }
+            
             
         }
 
@@ -68,7 +83,10 @@ namespace FitTrack
             this.Close();
         }
 
-        
+        public void AddWorkoutToList(Workout1.Workout newWorkout)
+        {
+            WorkoutList.Add(newWorkout); 
+        }
     }
 
 

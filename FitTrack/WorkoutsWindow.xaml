@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack"
         mc:Ignorable="d"
-        Title="WorkoutsWindow" Width="450" Height="800" Background="LightGray">
+        Title="WorkoutsWindow" Width="600" Height="800" Background="LightGray">
     <Grid>
         <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Left" >
             <Button x:Name="AddWorkout" Content="Add Workout" 
@@ -72,15 +72,20 @@
 
 
         </WrapPanel>
-        <DataGrid Name="workoutDataGrid" ItemsSource="{Binding WorkoutList}" 
-                  Height="400">
+        <DataGrid Name="workoutDataGrid" ItemsSource="{Binding WorkoutList}"
+                  AutoGenerateColumns="False" Height="400"
+                  VerticalAlignment="Center">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*" />
-                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="*"/>
-                <DataGridTextColumn Header="Calories" Binding="{Binding Calories}" Width="*"/>
-                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" />
+                <DataGridTextColumn Header="Calories" Binding="{Binding Calories}" />
+                <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" />
+                <DataGridTextColumn Header="Repetitions" Binding="{Binding Repetitions}" />
+                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" />
             </DataGrid.Columns>
         </DataGrid>
-        
+
+
     </Grid>
 </Window>

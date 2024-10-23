@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitTrack
 {
-    internal class Workout1
+    public abstract class Workout1
     {
         public abstract class Workout
         {
@@ -52,7 +52,7 @@ namespace FitTrack
             public StrengthWorkout(DateTime date, string type, string notes, TimeSpan duration, int calories, int repetitions)
         : base(date,type, notes, duration, calories)
             {
-                Repetitions = Repetitions;
+                Repetitions = repetitions;
             }
             public override int CalculateCaloriesBurned()
             {
