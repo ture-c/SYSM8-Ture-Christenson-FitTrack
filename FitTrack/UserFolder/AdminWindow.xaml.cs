@@ -25,7 +25,7 @@ namespace FitTrack
 
         private void LoadUsers()
         {
-            UserListBox.ItemsSource = RegisterWindow.ActiveUsers;
+            
         }
     }
 }

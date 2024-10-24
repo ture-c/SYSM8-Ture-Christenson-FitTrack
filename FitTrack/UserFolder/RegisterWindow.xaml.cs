@@ -19,7 +19,6 @@ namespace FitTrack
 
     public partial class RegisterWindow : Window
     {
-        internal static List<User> ActiveUsers = new List<User>();
         public RegisterWindow()
         {
             InitializeComponent();
@@ -30,39 +29,8 @@ namespace FitTrack
 
         private void CountrySelect()
         {
-            try
-            {
-
-
-                List<string> countryselect = new List<string>
-                {
-                "Austria", "Belgium",
-                "Bulgaria", "Croatia",
-                "Cyprus", "Czech Republic",
-                "Denmark", "Estonia",
-                "Finland", "France",
-                "Germany", "Greece",
-                "Hungary", "Ireland",
-                "Italy", "Latvia",
-                "Lithuania", "Luxembourg",
-                "Malta", "Netherlands",
-                "Poland", "Portugal",
-                "Romania", "Slovakia",
-                "Slovenia", "Spain",
-                "Sweden", "Iceland",
-                "Liechtenstein",
-                "Norway", "Switzerland"
-
-
-                };
-
-                CountryComboBox.ItemsSource = countryselect;
-                countryselect.Sort();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading country list: {ex.Message}");
-            }
+            User user = new User("", "", "", "", "");  
+            user.LoadCountryList(CountryComboBox);
         }
 
 
@@ -70,83 +38,29 @@ namespace FitTrack
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-
-            try
-            {
-                if (isFilled())
-                {
-                    User newUser = new User(UsernameTextBox.Text, PasswordBox.Password,
-                               CountryComboBox.SelectedItem?.ToString(),
-                                   SecurityQuestionCombobox.SelectedItem?.ToString(),
-                                    SecurityAnswerTextBox.Text);
-
-                    ActiveUsers.Add(newUser);
-                    MessageBox.Show("User registered successfully!");
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-                    this.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error during validation: {ex.Message}");
-                
-            }
-
-
-        }
-        private bool isFilled()
-        {
             try
             {
                 string username = UsernameTextBox.Text;
                 string password = PasswordBox.Password;
-                string confirmPassword = ConfirmPasswordBox.Password;
                 string country = CountryComboBox.SelectedItem?.ToString();
                 string securityQuestion = SecurityQuestionCombobox.SelectedItem?.ToString();
                 string securityAnswer = SecurityAnswerTextBox.Text;
-                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) ||
-                    string.IsNullOrEmpty(confirmPassword) || string.IsNullOrEmpty(country) ||
-                    string.IsNullOrEmpty(securityQuestion) || string.IsNullOrEmpty(securityAnswer))
-                {
-                    MessageBox.Show("All fields must be filled out.");
-                    return false;
-                }
 
+              
 
-                if (password.Length < 8)
-                {
-                    MessageBox.Show("Password must be at least 8 characters.");
-                    return false;
-                }
-
-
-                string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
-                bool hasSpecialChar = password.Any(c => specialCharacters.Contains(c));
-                bool hasNum = password.Any(char.IsDigit);
-
-                if (!hasSpecialChar || !hasNum)
-                {
-                    MessageBox.Show("Password must contain at least one special character and one number.");
-                    return false;
-                }
-
-
-                if (password != confirmPassword)
-                {
-                    MessageBox.Show("Passwords do not match.");
-                    return false;
-                }
-
-
-                return true;
+                User user = new User(username, password, country, securityQuestion, securityAnswer);
+                user.Register(username, password, country, securityQuestion, securityAnswer, User.ActiveUsers);
+                MainWindow main = new MainWindow();
+                main.Show();
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during validation: {ex.Message}");
-                return false;
+                MessageBox.Show($"Error during registration: {ex.Message}");
             }
         }
+
+    
 
 
 

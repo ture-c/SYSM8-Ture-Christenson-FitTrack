@@ -14,11 +14,11 @@
                 <TextBox   x:Name="UsernameTextBox" 
                  Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
                 <Label Content="Password:" HorizontalAlignment="Center"/>
-                <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"
+                <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged_1"
              Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
                 <Label Content="Confirm Password:" HorizontalAlignment="Center"/>
                 <PasswordBox x:Name="NewPasswordBox" 
-                     PasswordChanged="ConfirmPasswordBox_PasswordChanged"
+                     PasswordChanged="NewPasswordBox_PasswordChanged"
                      Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson"
                      />
                 <Label Content="Select Country" HorizontalAlignment="Center" />

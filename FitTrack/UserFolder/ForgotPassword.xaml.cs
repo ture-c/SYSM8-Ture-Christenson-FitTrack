@@ -41,7 +41,7 @@ namespace FitTrack
             User userToReset = null;
 
             
-            foreach (User user in RegisterWindow.ActiveUsers)
+            foreach (User user in User.ActiveUsers)
             {
                 if (user.Username.Equals(username))
                 {

@@ -51,7 +51,7 @@ namespace FitTrack
                     return;
                 }
 
-                foreach (User user in RegisterWindow.ActiveUsers)
+                foreach (User user in User.ActiveUsers)
                 {
                     if (user.Username == username && user.Password == password)
                     {
