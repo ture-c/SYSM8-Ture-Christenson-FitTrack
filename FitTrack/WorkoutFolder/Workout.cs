@@ -50,7 +50,7 @@ namespace FitTrack
             public int Repetitions { get; set; }
 
             public StrengthWorkout(DateTime date, string type, string notes, TimeSpan duration, int calories, int repetitions)
-        : base(date,type, notes, duration, calories)
+        : base(date, type, notes, duration, calories)
             {
                 Repetitions = repetitions;
             }
@@ -67,4 +67,3 @@ namespace FitTrack
     }
 }
 
-    

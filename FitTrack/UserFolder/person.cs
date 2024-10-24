@@ -10,7 +10,7 @@ using System.Diagnostics.Metrics;
 using System.Runtime.ConstrainedExecution;
 
 namespace FitTrack
-{ 
+{
     internal class Person1
     {
         public abstract class Person
@@ -28,7 +28,7 @@ namespace FitTrack
             }
             public virtual void SignIn(string username, string password)
             {
-                
+
             }
 
 
@@ -42,7 +42,7 @@ namespace FitTrack
             public string SecurityAnswer { get; private set; }
 
 
-            public User(string username, string password, string country, string SecurityQuestion, string SecurityAnswer) 
+            public User(string username, string password, string country, string SecurityQuestion, string SecurityAnswer)
                 : base(username, password)
             {
                 Country = country;
@@ -53,13 +53,13 @@ namespace FitTrack
 
             public override void SignIn(string username, string password)
             {
-                
+
             }
 
 
             public bool ResetPassword(string username, string answer, string newPassword)
             {
-                
+
                 foreach (User user in RegisterWindow.ActiveUsers)
                 {
                     if (SecurityAnswer == answer && Username == username)
@@ -73,7 +73,7 @@ namespace FitTrack
                         MessageBox.Show("Wrong username or answer.");
                         return false;
                     }
-                    
+
                 }
                 MessageBox.Show("Wrong Username Or Answer.");
                 return false;
@@ -83,28 +83,51 @@ namespace FitTrack
             }
 
 
-
-
-
-
-
-
             public class AdminUser : User
             {
-                public AdminUser(string username, string password, string country, string SecurityQuestion, string SecurityAnswer)
-                : base(username, password, SecurityAnswer, SecurityQuestion, country)
-                {
-                        
-                }
-                
-
-                public void ManageAllWorkouts()
+                public AdminUser(string username, string password, string country, string securityquestion, string securityanswer)
+                : base(username, password, securityanswer, securityquestion, country)
                 {
 
-                    return;
                 }
+
+                public bool isAdmin(string username, string password)
+                {
+                    if (username == "admin" && password == "password")
+                    {
+                        AdminWindow adminwin = new AdminWindow();
+                        adminwin.Show();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+
+                }
+
 
             }
+
+            public void manageallusers()
+            {
+
+            }
+
+            public void manageallworkouts()
+            {
+
+
+            }
+
+
+
+
+
+
+
+
 
         }
     }

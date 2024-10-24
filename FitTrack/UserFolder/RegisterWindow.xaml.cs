@@ -16,7 +16,7 @@ using static FitTrack.Person1;
 
 namespace FitTrack
 {
-    
+
     public partial class RegisterWindow : Window
     {
         internal static List<User> ActiveUsers = new List<User>();
@@ -32,20 +32,20 @@ namespace FitTrack
         {
             List<string> countryselect = new List<string>
             {
-                "Austria", "Belgium", 
-                "Bulgaria", "Croatia", 
-                "Cyprus", "Czech Republic", 
-                "Denmark", "Estonia", 
+                "Austria", "Belgium",
+                "Bulgaria", "Croatia",
+                "Cyprus", "Czech Republic",
+                "Denmark", "Estonia",
                 "Finland", "France",
                 "Germany", "Greece",
                 "Hungary", "Ireland",
-                "Italy", "Latvia", 
+                "Italy", "Latvia",
                 "Lithuania", "Luxembourg",
-                "Malta", "Netherlands", 
-                "Poland", "Portugal", 
-                "Romania", "Slovakia", 
+                "Malta", "Netherlands",
+                "Poland", "Portugal",
+                "Romania", "Slovakia",
                 "Slovenia", "Spain",
-                "Sweden", "Iceland", 
+                "Sweden", "Iceland",
                 "Liechtenstein",
                 "Norway", "Switzerland"
 
@@ -62,65 +62,69 @@ namespace FitTrack
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            string username = UsernameTextBox.Text;
-            string password = PasswordBox.Password;
-            string country = CountryComboBox.SelectedItem?.ToString();
-            string securityQuestion = SecurityQuestionCombobox.SelectedItem?.ToString();
-            string securityAnswer = SecurityAnswerTextBox.Text;
 
-
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (isFilled())
             {
-                MessageBox.Show("Username and password cannot be empty.");
-                return;
+                User newUser = new User(UsernameTextBox.Text, PasswordBox.Password,
+                           CountryComboBox.SelectedItem?.ToString(),
+                               SecurityQuestionCombobox.SelectedItem?.ToString(),
+                                SecurityAnswerTextBox.Text);
+
+                ActiveUsers.Add(newUser);
+                MessageBox.Show("User registered successfully!");
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
             }
-
-            if (password.Length < 8)
-            {
-                MessageBox.Show("Password must be at least 8 characters.");
-                return;
-            }
-            string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
-            bool hasSpecialChar = false;
-            bool hasNum = false;
-
-            foreach (char c in password)
-            {
-                if (specialCharacters.Contains(c))
-                {
-                    hasSpecialChar = true;
-                }
-                if (char.IsDigit(c))
-                {
-                    hasNum = true;
-                }
-
-            }
-            if (!hasSpecialChar || !hasNum)
-            {
-                MessageBox.Show("Must contain a number and special character.");
-            }
-
-            if (password != ConfirmPasswordBox.Password)
-            {
-                MessageBox.Show("Passwords do not match.");
-                return;
-            }
-
-
-
-
-            User newUser = new User(username, password, country, securityQuestion, securityAnswer);
-            ActiveUsers.Add(newUser);
-            MessageBox.Show("User registered successfully!");
-
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
 
 
 
         }
+        private bool isFilled()
+        {
+            string username = UsernameTextBox.Text;
+            string password = PasswordBox.Password;
+            string confirmPassword = ConfirmPasswordBox.Password;
+            string country = CountryComboBox.SelectedItem?.ToString();
+            string securityQuestion = SecurityQuestionCombobox.SelectedItem?.ToString();
+            string securityAnswer = SecurityAnswerTextBox.Text;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) ||
+                string.IsNullOrEmpty(confirmPassword) || string.IsNullOrEmpty(country) ||
+                string.IsNullOrEmpty(securityQuestion) || string.IsNullOrEmpty(securityAnswer))
+            {
+                MessageBox.Show("All fields must be filled out.");
+                return false;
+            }
+
+
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Password must be at least 8 characters.");
+                return false;
+            }
+
+
+            string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            bool hasSpecialChar = password.Any(c => specialCharacters.Contains(c));
+            bool hasNum = password.Any(char.IsDigit);
+
+            if (!hasSpecialChar || !hasNum)
+            {
+                MessageBox.Show("Password must contain at least one special character and one number.");
+                return false;
+            }
+
+
+            if (password != confirmPassword)
+            {
+                MessageBox.Show("Passwords do not match.");
+                return false;
+            }
+
+
+            return true;
+        }
+
 
 
 
@@ -139,5 +143,4 @@ namespace FitTrack
         }
     }
 }
-
 

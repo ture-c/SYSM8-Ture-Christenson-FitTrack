@@ -12,16 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace FitTrack
 {
-    /// <summary>
-    /// Interaction logic for AdminWindow.xaml
-    /// </summary>
+    
     public partial class AdminWindow : Window
     {
         public AdminWindow()
         {
             InitializeComponent();
+        }
+
+        private void LoadUsers()
+        {
+            //UserListBox.ItemsSource = RegisterWindow.ActiveUsers;
         }
     }
 }

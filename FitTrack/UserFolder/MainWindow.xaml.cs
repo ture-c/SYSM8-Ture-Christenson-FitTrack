@@ -1,31 +1,21 @@
-﻿using System.Configuration;
-using System.Diagnostics.Eventing.Reader;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static FitTrack.AddWorkoutWindow;
 using static FitTrack.Person1;
+using static FitTrack.Person1.User;
 
 namespace FitTrack
 {
-   
+
     public partial class MainWindow : Window
     {
-        
+
         public MainWindow()
         {
+
             InitializeComponent();
 
-            //person = new Person1.User("admin", "testtest123-", "Country", "What is your favorite color?", "Blue");
         }
+
 
 
         public void Register()
@@ -34,7 +24,7 @@ namespace FitTrack
 
             registerwindow.Show();
             this.Close();
-            
+
 
         }
         public void SignIn(string username, string password)
@@ -43,31 +33,50 @@ namespace FitTrack
             {
                 if (user.Username == username && user.Password == password)
                 {
-                    
+
                     MessageBox.Show("Login successful!");
-                   
+
                     WorkoutsWindow workoutwindow = new WorkoutsWindow();
                     workoutwindow.Show();
                     this.Close();
                 }
+                else if (user is AdminUser adminUser && adminUser.Username == username && adminUser.Password == password)
+                {
+                    MessageBox.Show("Welcome Admin!");
+                    AdminWindow adminWindow = new AdminWindow();
+                    adminWindow.Show();
+                    WorkoutsWindow workoutwindow = new WorkoutsWindow();
+                    workoutwindow.Show();
+                    this.Close();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Wrong username or password.");
+                }
             }
-            MessageBox.Show("Wrong username or password.");
+
         }
 
 
 
 
-
-
-      private void LogInbtn_Click(object sender, RoutedEventArgs e) 
+        private void LogInbtn_Click(object sender, RoutedEventArgs e)
         {
-            string username = UserNameTextBox.Text; 
-            string password = PasswordBox.Password; 
+            try
+            {
+                string username = UserNameTextBox.Text;
+                string password = PasswordBox.Password;
 
-            SignIn(username, password);
+                SignIn(username, password);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during login: {ex.Message}");
+            }
         }
         private void NewUserbtn_Click(object sender, RoutedEventArgs e) { Register(); }
-        
+
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
