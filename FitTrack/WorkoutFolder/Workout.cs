@@ -40,7 +40,7 @@ namespace FitTrack
             public override int CalculateCaloriesBurned()
             {
 
-                return (int)(Duration.TotalMinutes * Distance);
+                return (int)(Distance * 0.7 * Duration.TotalMinutes);
             }
 
 
@@ -57,7 +57,7 @@ namespace FitTrack
             public override int CalculateCaloriesBurned()
             {
 
-                return (int)(Duration.TotalMinutes * Repetitions);
+                return (int)(Repetitions * 0.5 * Duration.TotalMinutes);
 
 
 

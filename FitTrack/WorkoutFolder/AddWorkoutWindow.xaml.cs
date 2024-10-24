@@ -57,13 +57,8 @@ namespace FitTrack
                 }
                 TimeSpan duration = TimeSpan.FromMinutes(durationMinutes);
 
-               
-                if (string.IsNullOrEmpty(CaloriesBurnedInput.Text) || !int.TryParse(CaloriesBurnedInput.Text, out int caloriesBurned))
-                {
-                    MessageBox.Show("Please enter a valid number of calories burned.");
-                    return;
-                }
-
+         
+                
                 string notes = NotesInput.Text;
 
                 
@@ -78,7 +73,7 @@ namespace FitTrack
                         return;
                     }
 
-                    work = new CardioWorkout(dateInput, workoutType, notes, duration, caloriesBurned, distance);
+                    work = new CardioWorkout(dateInput, workoutType, notes, duration, 0, distance);
                 }
                 else if (workoutType == "Strength")
                 {
@@ -89,7 +84,7 @@ namespace FitTrack
                         return;
                     }
 
-                    work = new StrengthWorkout(dateInput, workoutType, notes, duration, caloriesBurned, repetitions);
+                    work = new StrengthWorkout(dateInput, workoutType, notes, duration, 0, repetitions);
                 }
                 else
                 {
@@ -97,7 +92,9 @@ namespace FitTrack
                     return;
                 }
 
-                
+                int calculatedCalories = work.CalculateCaloriesBurned();
+                work.Calories = calculatedCalories;
+
                 parentWindow.AddWorkoutToList(work);
                 MessageBox.Show("Workout saved successfully.");
                 this.Close();

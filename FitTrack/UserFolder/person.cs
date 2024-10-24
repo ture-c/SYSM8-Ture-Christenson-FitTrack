@@ -91,36 +91,26 @@ namespace FitTrack
 
                 }
 
-                public bool isAdmin(string username, string password)
+                public static bool IsAdmin(string username, string password)
                 {
-                    if (username == "admin" && password == "password")
-                    {
-                        AdminWindow adminwin = new AdminWindow();
-                        adminwin.Show();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return true;
+                }
+
+
+
+
+                public void manageallusers()
+                {
+
+                }
+
+                public void manageallworkouts()
+                {
 
 
                 }
 
-
             }
-
-            public void manageallusers()
-            {
-
-            }
-
-            public void manageallworkouts()
-            {
-
-
-            }
-
 
 
 
