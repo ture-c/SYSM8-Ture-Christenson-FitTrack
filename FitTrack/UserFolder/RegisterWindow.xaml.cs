@@ -29,7 +29,7 @@ namespace FitTrack
 
         private void CountrySelect()
         {
-            User user = new User("", "", "", "", "");  
+            User user = new User("", "", "", "", "");
             user.LoadCountryList(CountryComboBox);
         }
 
@@ -46,10 +46,10 @@ namespace FitTrack
                 string securityQuestion = SecurityQuestionCombobox.SelectedItem?.ToString();
                 string securityAnswer = SecurityAnswerTextBox.Text;
 
-              
+
 
                 User user = new User(username, password, country, securityQuestion, securityAnswer);
-                user.Register(username, password, country, securityQuestion, securityAnswer, User.ActiveUsers);
+                user.Register(username, password, country, securityQuestion, securityAnswer);
                 MainWindow main = new MainWindow();
                 main.Show();
                 this.Close();
@@ -60,7 +60,7 @@ namespace FitTrack
             }
         }
 
-    
+
 
 
 
@@ -80,4 +80,3 @@ namespace FitTrack
         }
     }
 }
-

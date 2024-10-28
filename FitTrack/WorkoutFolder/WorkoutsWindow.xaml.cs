@@ -12,7 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
- 
+using static FitTrack.Person1;
+
 
 namespace FitTrack
 {
@@ -20,12 +21,14 @@ namespace FitTrack
     {
         public ObservableCollection<Workout1.Workout> WorkoutList { get; set; }
 
-        public WorkoutsWindow()
+        private User thisUser;
+
+        public WorkoutsWindow(User user)
         {
             InitializeComponent();
 
             WorkoutList = new ObservableCollection<Workout1.Workout>();
-
+            this.thisUser = user;
 
             DataContext = this;
         }
@@ -67,7 +70,7 @@ namespace FitTrack
 
         private void userdetails_Click(object sender, RoutedEventArgs e)
         {
-            UserDetailsWindow userdetailswindow = new UserDetailsWindow();
+            UserDetailsWindow userdetailswindow = new UserDetailsWindow(thisUser);
             userdetailswindow.Show();
             this.Close();
         }

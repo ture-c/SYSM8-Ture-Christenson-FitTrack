@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using static FitTrack.Person1;
 using static FitTrack.Person1.User;
+using static FitTrack.Person1.AdminUser;
 
 namespace FitTrack
 {
@@ -37,39 +38,36 @@ namespace FitTrack
         {
             try
             {
-                if (adminUser.Username.Equals(username, 
-                    StringComparison.OrdinalIgnoreCase) 
-                        && adminUser.Password == password)
-                    {
+              
+                if (adminUser.SignIn(username, password))
+                {
                     MessageBox.Show("Welcome Admin!");
                     AdminWindow adminWindow = new AdminWindow();
+                    WorkoutsWindow workoutwindow = new WorkoutsWindow(adminUser);
                     adminWindow.Show();
-                    WorkoutsWindow workoutwindow = new WorkoutsWindow();
                     workoutwindow.Show();
                     this.Close();
-
                     return;
                 }
 
+                bool userFound = false;
                 foreach (User user in User.ActiveUsers)
                 {
                     if (user.Username == username && user.Password == password)
                     {
-
                         MessageBox.Show("Login successful!");
-
-                        WorkoutsWindow workoutwindow = new WorkoutsWindow();
+                        WorkoutsWindow workoutwindow = new WorkoutsWindow(user);
                         workoutwindow.Show();
-
                         this.Close();
+                        userFound = true;
+                        break; 
                     }
-                    else
-                    {
-                        MessageBox.Show("Wrong username or password.");
-                    }
-
                 }
-                
+
+                if (!userFound)
+                {
+                    MessageBox.Show("Wrong username or password.");
+                }
             }
             catch (Exception ex)
             {

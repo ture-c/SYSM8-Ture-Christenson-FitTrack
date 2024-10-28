@@ -10,8 +10,8 @@ using System.Diagnostics.Metrics;
 using System.Runtime.ConstrainedExecution;
 
 namespace FitTrack
-{
-    internal class Person1
+{ 
+  public class Person1
     {
         public abstract class Person
         {
@@ -26,8 +26,10 @@ namespace FitTrack
 
 
             }
-            public virtual void SignIn(string username, string password)
+            public virtual bool SignIn(string username, string password)
             {
+                return Username.Equals(username, StringComparison.OrdinalIgnoreCase) && Password == password;
+
 
             }
 
@@ -37,7 +39,7 @@ namespace FitTrack
         }
         public class User : Person
         {
-            public string Country { get; private set; }
+            public string Country { get; set; }
             public string SecurityQuestion { get; private set; }
             public string SecurityAnswer { get; private set; }
 
@@ -50,34 +52,35 @@ namespace FitTrack
                 this.SecurityAnswer = SecurityAnswer;
             }
 
+            //Listan av användarer
             public static List<User> ActiveUsers = new List<User>();
 
-            public override void SignIn(string username, string password)
+            public override bool SignIn(string username, string password)
             {
-
+                return base.SignIn(username, password);
             }
 
             public void Register(string username, string password, string country, string securityQuestion, string securityAnswer)
             {
 
-                
 
 
+                //när isFilled är klar så skapas en ny användare
                 if (isFilled(username, password, country, securityQuestion, securityAnswer))
                 {
 
 
-                        User newUser = new User(username, password, country, securityQuestion, securityAnswer);
-                        ActiveUsers.Add(this);
-                        MessageBox.Show("User registered successfully!");
-                        
+                    User newUser = new User(username, password, country, securityQuestion, securityAnswer);
+                    ActiveUsers.Add(newUser);
+                    MessageBox.Show("User registered successfully!");
+
 
                 }
-                   
+
             }
 
-
-            private bool isFilled(string username, string password, string country, string securityQuestion, string securityAnswer)
+            // Ser till så att användaren har fyllt i alla boxar samt fyllt i kriterier som exempelvis lösenordets längd i RegisterWindow.
+            public bool isFilled(string username, string password, string country, string securityQuestion, string securityAnswer)
             {
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) ||
                     string.IsNullOrEmpty(country) || string.IsNullOrEmpty(securityQuestion) ||
@@ -96,13 +99,13 @@ namespace FitTrack
 
                 string specialCharacters = "@\\|!#$%&/()=?»«@£§€{}.-;'<>_,";
 
-                bool hasSpecialChar = false;  
+                bool hasSpecialChar = false;
                 foreach (char c in password)
                 {
-                    if (specialCharacters.Contains(c))  
+                    if (specialCharacters.Contains(c))
                     {
-                        hasSpecialChar = true;  
-                        break;  
+                        hasSpecialChar = true;
+                        break;
                     }
                 }
 
@@ -115,11 +118,11 @@ namespace FitTrack
                     return false;
                 }
 
-                return false;
+                return true;
             }
 
-            
 
+            //Comboboxlista som används i register. 
             public void LoadCountryList(ComboBox countryComboBox)
             {
                 try
@@ -130,17 +133,17 @@ namespace FitTrack
                         "Bulgaria", "Croatia",
                     "Cyprus", "Czech Republic",
                         "Denmark", "Estonia",
-                    "Finland", "France", 
+                    "Finland", "France",
                         "Germany", "Greece",
-                    "Hungary", "Ireland", 
+                    "Hungary", "Ireland",
                         "Italy", "Latvia",
                     "Lithuania", "Luxembourg",
                         "Malta", "Netherlands", "Norway",
-                    "Poland", "Portugal", 
+                    "Poland", "Portugal",
                         "Romania", "Slovakia",
-                    "Slovenia", "Spain", 
+                    "Slovenia", "Spain",
                         "Sweden", "Iceland",
-                    "Liechtenstein", "Norway", 
+                    "Liechtenstein", "Norway",
                         "Switzerland"
                                                         };
 
@@ -159,7 +162,7 @@ namespace FitTrack
 
 
 
-
+                // Ser så att säkerhetssvaret och användarnamnet överrensstämmer.
                 foreach (User user in User.ActiveUsers)
                 {
                     if (SecurityAnswer == answer && Username == username)
@@ -183,42 +186,42 @@ namespace FitTrack
         }
 
 
-            public class AdminUser : User
+        public class AdminUser : User
+        {
+            public AdminUser(string username, string password, string country, string securityquestion, string securityanswer)
+            : base(username, password, securityanswer, securityquestion, country)
             {
-                public AdminUser(string username, string password, string country, string securityquestion, string securityanswer)
-                : base(username, password, securityanswer, securityquestion, country)
-                {
 
-                }
+            }
 
-                public static bool IsAdmin(string username, string password)
-                {
-                    return true;
-                }
-
-
-
-
-                public void manageallusers()
-                {
-                    foreach (User user in User.ActiveUsers) ;
-                }
-
-                public void manageallworkouts()
-                {
-
-
-                }
-
+            public static bool IsAdmin(string username, string password)
+            {
+                return true;
             }
 
 
 
 
+            public void manageallusers()
+            {
+                foreach (User user in User.ActiveUsers) ;
+            }
+
+            public void manageallworkouts()
+            {
+
+
+            }
+
+        }
 
 
 
 
-        
+
+
+
+
+
     }
 }
