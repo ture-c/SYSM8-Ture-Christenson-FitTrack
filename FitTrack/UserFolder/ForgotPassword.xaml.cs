@@ -57,8 +57,6 @@ namespace FitTrack
                 if (userToReset.ResetPassword(username, answer, newPassword))
                 {
                     
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
                     this.Close();
                 }
             }

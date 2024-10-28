@@ -27,32 +27,50 @@ namespace FitTrack
 
         private void ChangeBtn_Click(object sender, RoutedEventArgs e)
         {
+
+
+
+            // Tar informationen från Ui. 
+            string username = UsernameTextBox.Text;
+            string password = PasswordBox.Password; //Nuvarande lösenordet
+            string newPassword = NewPasswordBox.Password; // Gamla lösenordet
+            string country = CountryComboBox.SelectedItem?.ToString();
             
-            if (PasswordBox.Password != NewPasswordBox.Password)
+
+            // Validerar lösenordet via isFilled i person
+            if (!thisUser.isFilled(username, newPassword, country))
+            {
+                return; // om validering är fel.
+            }
+
+            // ser till så att om nya lösenordet inte matchar så slutar den.
+            if (newPassword != NewPasswordBox.Password)
             {
                 MessageBox.Show("Passwords do not match.");
                 return;
             }
-            if (string.IsNullOrEmpty(UsernameTextBox.Text) || string.IsNullOrEmpty(PasswordBox.Password))
-            {
-                MessageBox.Show("All fields must be filled out.");
-                return;
-            }
 
-            // Updaterar användarens information.
-            thisUser.Username = UsernameTextBox.Text;
-            thisUser.Password = PasswordBox.Password;
-            if (CountryComboBox.SelectedItem != null)
+            // Updaaterar personens info
+            thisUser.Username = username;
+            thisUser.Password = newPassword; // Updaterar nya lösenordet. 
+
+            if (country != null)
             {
-                thisUser.Country = CountryComboBox.SelectedItem.ToString();
+                thisUser.Country = country;
             }
 
             MessageBox.Show("User details updated successfully!");
-        }
+
+            this.Close();
+            WorkoutsWindow win = new WorkoutsWindow(thisUser);
+            win.Show();
+        }   
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            WorkoutsWindow win = new WorkoutsWindow(thisUser);
+            win.Show();
         }
 
         private void PasswordBox_PasswordChanged_1(object sender, RoutedEventArgs e)

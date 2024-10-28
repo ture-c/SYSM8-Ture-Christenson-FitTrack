@@ -13,10 +13,10 @@
                 <Label Content="Username:" HorizontalAlignment="Center" />
                 <TextBox   x:Name="UsernameTextBox" 
                  Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
-                <Label Content="Password:" HorizontalAlignment="Center"/>
+                <Label Content="Current Password:" HorizontalAlignment="Center"/>
                 <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged_1"
              Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
-                <Label Content="Confirm Password:" HorizontalAlignment="Center"/>
+                <Label Content="New Password:" HorizontalAlignment="Center"/>
                 <PasswordBox x:Name="NewPasswordBox" 
                      PasswordChanged="NewPasswordBox_PasswordChanged"
                      Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson"

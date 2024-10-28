@@ -15,15 +15,15 @@
                        TextAlignment="Center"
                        Foreground="Crimson" 
                        FontWeight="Bold"/>
-
+            <Label Content="Username:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"       />
             <TextBox x:Name="UserNameTextBox"
-                     Text="Username"
+                     Text=""
                      Width="200" Height="20"
                      Foreground="Crimson"
                      BorderBrush="Crimson"
                      />
 
-            
+            <Label Content="Password:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"       />
             <PasswordBox x:Name="PasswordBox"
                          Width="200" Height="20" 
                          Foreground="Crimson"

@@ -18,12 +18,10 @@ namespace FitTrack
 
           
            InitializeComponent();
-            
-            
+            UserNameTextBox.Text = adminUser.Username;
+            PasswordBox.Password = adminUser.Password;
 
         }
-
-
 
         public void Register()
         {
@@ -74,11 +72,6 @@ namespace FitTrack
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
-
-
-
-
-
 
         private void LogInbtn_Click(object sender, RoutedEventArgs e)
         {

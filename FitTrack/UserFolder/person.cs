@@ -65,8 +65,8 @@ namespace FitTrack
 
 
 
-                //när isFilled är klar så skapas en ny användare
-                if (isFilled(username, password, country, securityQuestion, securityAnswer))
+                //när isFilled och Security är klar så skapas en ny användare
+                if (isFilled(username, password, country) && Security(securityQuestion, securityAnswer))
                 {
 
 
@@ -79,12 +79,11 @@ namespace FitTrack
 
             }
 
-            // Ser till så att användaren har fyllt i alla boxar samt fyllt i kriterier som exempelvis lösenordets längd i RegisterWindow.
-            public bool isFilled(string username, string password, string country, string securityQuestion, string securityAnswer)
+            // Ser till så att användaren har fyllt i alla boxar samt fyllt i kriterier som exempelvis lösenordets längd i RegisterWindow och userwindow.
+            public bool isFilled(string username, string password, string country)
             {
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) ||
-                    string.IsNullOrEmpty(country) || string.IsNullOrEmpty(securityQuestion) ||
-                    string.IsNullOrEmpty(securityAnswer))
+                    string.IsNullOrEmpty(country))
                 {
                     MessageBox.Show("All fields must be filled out.");
                     return false;
@@ -120,9 +119,20 @@ namespace FitTrack
 
                 return true;
             }
+            public bool Security(string securityQuestion, string securityAnswer)
+            {
+                if (!string.IsNullOrEmpty(securityQuestion) && string.IsNullOrEmpty(securityAnswer))
+                {
+                    MessageBox.Show("All fields must be filled out.");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
 
-
-            //Comboboxlista som används i register. 
+            //Comboboxlista som används i register och new userwindow. 
             public void LoadCountryList(ComboBox countryComboBox)
             {
                 try
@@ -138,7 +148,7 @@ namespace FitTrack
                     "Hungary", "Ireland",
                         "Italy", "Latvia",
                     "Lithuania", "Luxembourg",
-                        "Malta", "Netherlands", "Norway",
+                        "Malta", "Netherlands",
                     "Poland", "Portugal",
                         "Romania", "Slovakia",
                     "Slovenia", "Spain",
@@ -161,7 +171,6 @@ namespace FitTrack
             {
 
 
-
                 // Ser så att säkerhetssvaret och användarnamnet överrensstämmer.
                 foreach (User user in User.ActiveUsers)
                 {
@@ -169,7 +178,12 @@ namespace FitTrack
                     {
                         Password = newPassword;
                         MessageBox.Show("Reset successful!");
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+
                         return true;
+                        
+                        
                     }
                     else
                     {

@@ -22,7 +22,7 @@ namespace FitTrack
         public AddWorkoutWindow(WorkoutsWindow parent)
         {
             InitializeComponent();
-            parentWindow = parent;
+            parentWindow = parent; // Spara referensen till förälderfönstret
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -74,10 +74,11 @@ namespace FitTrack
                     }
 
                     work = new CardioWorkout(dateInput, workoutType, notes, duration, 0, distance);
+                    RepetitionsInput.IsReadOnly = true;
                 }
                 else if (workoutType == "Strength")
                 {
-                    
+                    // Validera inmatningen för repetitioner då kommer 'repetitions' att innehålla värdet
                     if (string.IsNullOrEmpty(RepetitionsInput.Text) || !int.TryParse(RepetitionsInput.Text, out int repetitions))
                     {
                         MessageBox.Show("Please enter a valid number of repetitions for Strength.");
@@ -85,6 +86,8 @@ namespace FitTrack
                     }
 
                     work = new StrengthWorkout(dateInput, workoutType, notes, duration, 0, repetitions);
+
+                    
                 }
                 else
                 {
@@ -120,6 +123,7 @@ namespace FitTrack
             {
                 DistanceInput.Visibility = Visibility.Collapsed;
                 RepetitionsInput.Visibility = Visibility.Visible;
+                
             }
         }
     }

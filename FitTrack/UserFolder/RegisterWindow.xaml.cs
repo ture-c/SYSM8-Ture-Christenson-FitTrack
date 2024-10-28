@@ -61,10 +61,6 @@ namespace FitTrack
         }
 
 
-
-
-
-
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox passwordBox = sender as PasswordBox;

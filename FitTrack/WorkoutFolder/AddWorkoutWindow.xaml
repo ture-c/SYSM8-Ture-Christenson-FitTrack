@@ -17,7 +17,7 @@
             <TextBox x:Name="DurationInput" />
 
             <Label Content="Calories Burned:" />
-            <TextBox x:Name="CaloriesBurnedInput" />
+            <TextBox x:Name="CaloriesBurnedInput" IsReadOnly="True"/>
 
             <Label Content="Distance (only for Cardio):" />
             <TextBox x:Name="DistanceInput" />
