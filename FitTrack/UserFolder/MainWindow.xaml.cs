@@ -3,23 +3,22 @@ using System.Windows.Controls;
 using static FitTrack.Person1;
 using static FitTrack.Person1.User;
 using static FitTrack.Person1.AdminUser;
-
+using static FitTrack.AdminWindow;
 namespace FitTrack
 {
     
 
     public partial class MainWindow : Window
     {
-        AdminUser adminUser = new AdminUser("admin", "password", "Sweden", "What is your mother name", "Jane Doe" );
-           
+
+        AdminUser adminUser = new AdminUser("admin", "password", "Sweden", "What is your mother name", "Jane Doe");
 
         public MainWindow()
         {
-
+             
           
            InitializeComponent();
-            UserNameTextBox.Text = adminUser.Username;
-            PasswordBox.Password = adminUser.Password;
+            
 
         }
 
@@ -40,7 +39,7 @@ namespace FitTrack
                 if (adminUser.SignIn(username, password))
                 {
                     MessageBox.Show("Welcome Admin!");
-                    AdminWindow adminWindow = new AdminWindow();
+                    AdminWindow adminWindow = new AdminWindow(adminUser);
                     WorkoutsWindow workoutwindow = new WorkoutsWindow(adminUser);
                     adminWindow.Show();
                     workoutwindow.Show();

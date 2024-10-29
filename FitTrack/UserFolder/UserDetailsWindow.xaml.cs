@@ -28,7 +28,17 @@ namespace FitTrack
         private void ChangeBtn_Click(object sender, RoutedEventArgs e)
         {
 
-
+            if (thisUser.Username.Length < 3)
+            {
+                MessageBox.Show("Username must be at least 3 characters.");
+                return;
+            }
+            
+            if (User.ActiveUsers.Any(user => user.Username.Equals(thisUser.Username, StringComparison.OrdinalIgnoreCase) && user != thisUser))
+            {
+                MessageBox.Show("Username already exists. Please choose a different username.");
+                return;
+            }
 
             // Tar informationen från Ui. 
             string username = UsernameTextBox.Text;

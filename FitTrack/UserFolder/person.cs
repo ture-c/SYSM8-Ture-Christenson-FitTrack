@@ -8,6 +8,7 @@ using System.Windows;
 using static FitTrack.Person1;
 using System.Diagnostics.Metrics;
 using System.Runtime.ConstrainedExecution;
+using static FitTrack.Workout1;
 
 namespace FitTrack
 { 
@@ -54,6 +55,7 @@ namespace FitTrack
 
             //Listan av användarer
             public static List<User> ActiveUsers = new List<User>();
+            public List<Workout> Workouts { get; private set; } = new List<Workout>();
 
             public override bool SignIn(string username, string password)
             {
@@ -62,8 +64,12 @@ namespace FitTrack
 
             public void Register(string username, string password, string country, string securityQuestion, string securityAnswer)
             {
-
-
+                //Ser om användarnamn redan finns
+                if (ActiveUsers.Any(user => user.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
+                {
+                    MessageBox.Show("Username already exists. Please choose a different username.");
+                    return;
+                }
 
                 //när isFilled och Security är klar så skapas en ny användare
                 if (isFilled(username, password, country) && Security(securityQuestion, securityAnswer))
@@ -202,40 +208,54 @@ namespace FitTrack
 
         public class AdminUser : User
         {
-            public AdminUser(string username, string password, string country, string securityquestion, string securityanswer)
-            : base(username, password, securityanswer, securityquestion, country)
+            public AdminUser(string username, string password, string country, string securityQuestion, string securityAnswer)
+                : base(username, password, country, securityQuestion, securityAnswer)
             {
 
             }
 
-            public static bool IsAdmin(string username, string password)
+            //tar bort en användare från listan över aktiva användare.
+            public void RemoveUser(User user)
             {
-                return true;
+                if (ActiveUsers.Contains(user))
+                {
+                    ActiveUsers.Remove(user);
+                    MessageBox.Show($"User {user.Username} removed.");
+                }
+                else
+                {
+                    MessageBox.Show("User not found.");
+                }
+            }
+            //Tar bort workouts
+            public void RemoveWorkout(User user, Workout workout)
+            {
+                if (user.Workouts.Contains(workout))
+                {
+                    user.Workouts.Remove(workout);
+                    MessageBox.Show($"Workout '{workout.Type}' removed from user {user.Username}.");
+                }
+                else
+                {
+                    MessageBox.Show("Workout not found.");
+                }
             }
 
-
-
-
-            public void manageallusers()
+            public List<User> GetAllUsers()
             {
-                foreach (User user in User.ActiveUsers) ;
+                return ActiveUsers;
             }
 
-            public void manageallworkouts()
+            //metoden hämtar alla träningspass från alla aktiva användare och returnerar dem i en sammanställd lista.
+            public List<Workout> GetAllWorkouts()
             {
-
-
+                List<Workout> allWorkouts = new List<Workout>();
+                foreach (var user in ActiveUsers)
+                {
+                    allWorkouts.AddRange(user.Workouts); 
+                }
+                return allWorkouts;
             }
-
         }
-
-
-
-
-
-
-
-
-
     }
 }

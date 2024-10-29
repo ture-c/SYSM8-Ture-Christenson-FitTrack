@@ -46,7 +46,17 @@ namespace FitTrack
                 string securityQuestion = SecurityQuestionCombobox.SelectedItem?.ToString();
                 string securityAnswer = SecurityAnswerTextBox.Text;
 
+                if (username.Length < 3)
+                {
+                    MessageBox.Show("Username must be at least 3 characters.");
+                    return;
+                }
 
+                if (User.ActiveUsers.Any(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
+                {
+                    MessageBox.Show("Username already exists. Please choose a different username.");
+                    return;
+                }
 
                 User user = new User(username, password, country, securityQuestion, securityAnswer);
                 user.Register(username, password, country, securityQuestion, securityAnswer);
