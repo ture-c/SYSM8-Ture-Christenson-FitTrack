@@ -33,7 +33,7 @@ namespace FitTrack
                 MessageBox.Show("Username must be at least 3 characters.");
                 return;
             }
-            
+            //En så kallad lambda expression. Denna kollar om användarnamnet redan finns
             if (User.ActiveUsers.Any(user => user.Username.Equals(thisUser.Username, StringComparison.OrdinalIgnoreCase) && user != thisUser))
             {
                 MessageBox.Show("Username already exists. Please choose a different username.");
