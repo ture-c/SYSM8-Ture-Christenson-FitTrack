@@ -36,6 +36,7 @@ namespace FitTrack
         {
             try
             {
+                //Validera date
                 if (string.IsNullOrEmpty(DateInput.Text) || !DateTime.TryParse(DateInput.Text, out DateTime dateInput))
                 {
                     MessageBox.Show("Please enter a valid date.");
@@ -61,7 +62,7 @@ namespace FitTrack
                 
                 string notes = NotesInput.Text;
 
-                
+                //instansiera variable för att hålla Workout
                 Workout work = null;
 
                 if (workoutType == "Cardio")
@@ -94,7 +95,7 @@ namespace FitTrack
                     MessageBox.Show("Invalid workout type.");
                     return;
                 }
-
+                //räknar ut kalorierna
                 int calculatedCalories = work.CalculateCaloriesBurned();
                 work.Calories = calculatedCalories;
                 parentWindow.AddWorkoutToList(work);
@@ -114,7 +115,7 @@ namespace FitTrack
         private void WorkoutTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedWorkoutType = ((ComboBoxItem)WorkoutTypeComboBox.SelectedItem).Content.ToString();
-
+            //visar och döljer input fields baserat på vilken träningstyå man väljer.
             if (selectedWorkoutType == "Cardio")
             {
                 DistanceInput.Visibility = Visibility.Visible;

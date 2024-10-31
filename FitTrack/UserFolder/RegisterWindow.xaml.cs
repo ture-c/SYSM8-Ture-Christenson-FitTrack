@@ -29,6 +29,7 @@ namespace FitTrack
 
         private void CountrySelect()
         {
+            //Instansen är gjord för att hämta LoadCountry till combobox
             User user = new User("", "", "", "", "");
             user.LoadCountryList(CountryComboBox);
         }
@@ -62,6 +63,24 @@ namespace FitTrack
                 if (password != confirmPassword)
                 {
                     MessageBox.Show("Passwords do not match.");
+                    return;
+                }
+                //Se om country, säkerhetsfrågorna är valda.
+                if (string.IsNullOrEmpty(country))
+                {
+                    MessageBox.Show("Please select a country.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(securityQuestion))
+                {
+                    MessageBox.Show("Please select a security question.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(securityAnswer))
+                {
+                    MessageBox.Show("Please enter an answer for the security question.");
                     return;
                 }
 

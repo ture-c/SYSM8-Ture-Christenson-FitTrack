@@ -22,6 +22,7 @@ namespace FitTrack
             public string Username { get; set; }
             public string Password { get; set; }
 
+            //Konstruktor
             public Person(string username, string password)
             {
                 Username = username;
@@ -47,7 +48,7 @@ namespace FitTrack
             public string SecurityQuestion { get; private set; }
             public string SecurityAnswer { get; private set; }
 
-
+            //Konstruktor
             public User(string username, string password, string country, string SecurityQuestion, string SecurityAnswer)
                 : base(username, password)
             {
