@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,24 @@ using static FitTrack.Workout;
 
 namespace FitTrack
 {
-    public partial class WorkoutsWindow : Window
+    public partial class WorkoutsWindow : Window, INotifyPropertyChanged
     {
         // Håller listan av workouts. Updaterar även ui automatiskt efter inmatning.
         public ObservableCollection<Workout> WorkoutList { get; set; } = new ObservableCollection<Workout>();
         //Förvarar inloggade användaren(admin eller vanlig).
         public User thisUser;
+
+        
+        public Workout SelectedWorkout
+        {
+            get { return _selectedWorkout; }
+            set
+            {
+                _selectedWorkout = value;
+                OnPropertyChanged(nameof(SelectedWorkout));
+            }
+        }
+        public Workout _selectedWorkout;
         
         //Konstruktor som initierar fönstret och dess komponenter.
         public WorkoutsWindow(User user)
@@ -37,7 +50,13 @@ namespace FitTrack
             DataContext = this;
         }
 
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         private void AddWorkout_Click(object sender, RoutedEventArgs e)
         {
             AddWorkoutWindow addworkoutwin = new AddWorkoutWindow(this);
@@ -87,10 +106,18 @@ namespace FitTrack
             
         }
 
-        
         private void OpenDetails_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (SelectedWorkout != null)
+            {
+                WorkoutDetailsWindow detailsWindow = new WorkoutDetailsWindow(SelectedWorkout);
+                detailsWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a workout to view details.");
+            }
+
         }
 
 
@@ -103,7 +130,9 @@ namespace FitTrack
 
         private void Infobtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("FitTrack is a startup company based in Switzerland that provides users across the EU and EEUA, Workout Management. \n " +
+                "You use the app by first register new account. Then you login and add your first workout in Add Workout. You can view details of the workout in Workout details. \n" +
+                "In User Details you can change username, country and password.");
         }
 
         private void SignOut_Click(object sender, RoutedEventArgs e)
@@ -119,6 +148,8 @@ namespace FitTrack
 
 
         }
+
+       
     }
     
 

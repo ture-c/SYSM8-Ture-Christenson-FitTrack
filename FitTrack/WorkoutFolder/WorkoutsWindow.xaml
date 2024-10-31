@@ -31,7 +31,7 @@
                     FontWeight="ExtraBold"
                     Click="RemoveWorkout_Click"
                     />
-            <Button x:Name="OpenDetails" Content="Open Details" 
+            <Button x:Name="OpenDetails" Content="Workout Details" 
             Width="150"
             Height="75"
             HorizontalAlignment="Center"
@@ -42,7 +42,7 @@
             FontWeight="ExtraBold"
                 Click="OpenDetails_Click"
             />
-            <Button x:Name="userdetails" Content="User" Click="userdetails_Click"
+            <Button x:Name="userdetails" Content="User Details" Click="userdetails_Click"
                     Width="150"
             Height="75"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
@@ -74,16 +74,17 @@
         </WrapPanel>
         
         <DataGrid x:Name="workoutDataGrid" ItemsSource="{Binding WorkoutList}"
+                  SelectedItem="{Binding SelectedWorkout, Mode=TwoWay}"
                   AutoGenerateColumns="False" Height="400"
                   VerticalAlignment="Center">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" />
-                <DataGridTextColumn Header="Calories" Binding="{Binding Calories}" />
-                <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" />
-                <DataGridTextColumn Header="Repetitions" Binding="{Binding Repetitions}" />
-                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" />
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="80" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="80" />
+                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="80" />
+                <DataGridTextColumn Header="Calories" Binding="{Binding Calories}"  Width="80"/>
+                <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" Width="80"/>
+                <DataGridTextColumn Header="Repetitions" Binding="{Binding Repetitions}" Width="80" />
+                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="120" />
             </DataGrid.Columns>
         </DataGrid>
 

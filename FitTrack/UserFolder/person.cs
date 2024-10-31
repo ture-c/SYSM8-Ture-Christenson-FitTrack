@@ -68,6 +68,7 @@ namespace FitTrack
                 return base.SignIn(username, password);
             }
 
+
             public void AddWorkout(Workout workout)
             {
                 WorkoutList.Add(workout);
@@ -107,7 +108,6 @@ namespace FitTrack
                     return false;
                 }
 
-
                 if (password.Length < 8)
                 {
                     MessageBox.Show("Password must be at least 8 characters.");
@@ -139,15 +139,14 @@ namespace FitTrack
             }
             public bool Security(string securityQuestion, string securityAnswer)
             {
-                if (!string.IsNullOrEmpty(securityQuestion) && string.IsNullOrEmpty(securityAnswer))
+                if (string.IsNullOrEmpty(securityQuestion) || string.IsNullOrEmpty(securityAnswer))
                 {
                     MessageBox.Show("All fields must be filled out.");
                     return false;
                 }
-                else
-                {
+                
                     return true;
-                }
+                
             }
 
             //Comboboxlista som används i register och new userwindow. 
@@ -192,22 +191,15 @@ namespace FitTrack
                 // Ser så att säkerhetssvaret och användarnamnet överrensstämmer.
                 foreach (User user in User.ActiveUsers)
                 {
-                    if (SecurityAnswer == answer && Username == username)
+                    if (user.Username == username && user.SecurityAnswer == answer)
                     {
-                        Password = newPassword;
+                        user.Password = newPassword;
                         MessageBox.Show("Reset successful!");
                         return true;
-                        
-                        
                     }
-                    else
-                    {
-                        MessageBox.Show("Wrong username or answer.");
-                        return false;
-                    }
-
                 }
-                MessageBox.Show("Wrong Username Or Answer.");
+
+                    MessageBox.Show("Wrong Username Or Answer.");
                 return false;
             }
 

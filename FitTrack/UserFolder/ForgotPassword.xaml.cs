@@ -29,26 +29,25 @@ namespace FitTrack
 
         private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
+            var ConfirmPasswordBox = sender as PasswordBox;
 
+            string confirmpassword = ConfirmPasswordBox.Password;
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameTextBox.Text; 
             string answer = SecurityAnswerTextBox.Text; 
-            string newPassword = PasswordBox.Password; 
+            string newPassword = PasswordBox.Password;
+            string confirmpassword = ConfirmPasswordBox.Password;
 
-            User userToReset = null;
-
-            
-            foreach (User user in User.ActiveUsers)
+            if (newPassword != confirmpassword)
             {
-                if (user.Username.Equals(username))
-                {
-                    userToReset = user;
-                    break; 
-                }
+                MessageBox.Show("Passwords do not match.");
             }
+
+            //Hitta användaren
+            User userToReset = User.ActiveUsers.FirstOrDefault(u => u.Username.Equals(username));
 
             
             if (userToReset != null)

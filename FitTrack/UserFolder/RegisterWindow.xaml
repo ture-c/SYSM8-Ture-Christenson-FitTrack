@@ -38,6 +38,9 @@
             <Button x:Name="RegisterBtn" Click="RegisterBtn_Click"
                     Content="Register" Width="100" Height="30" Background="Crimson" Foreground="White"
                     FontSize="20" FontFamily="Arial"/>
+            <Button x:Name="Cancel" Click="Cancel_Click"
+                    Content="Cancel" Width="100" Height="30" Background="Crimson" Foreground="White"
+                    FontSize="20" FontFamily="Arial"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -13,13 +13,14 @@ namespace FitTrack
     {
         AdminUser adminUser = new AdminUser("admin", "password", "Sweden", "What is your mother name", "Jane Doe", true);
 
-        User testuser = new User("user", "user", "Sweden", "What is your mother name", "Jane Doe");
+        User testuser = new User("user", "password", "Sweden", "What is your mother name", "Jane Doe");
+
         public MainWindow()
         {
             
           
            InitializeComponent();
-            
+            DefaultUserWorkouts(testuser);
 
         }
 
@@ -29,6 +30,7 @@ namespace FitTrack
 
             registerwindow.Show();
             this.Close();
+            
 
 
         }
@@ -54,6 +56,7 @@ namespace FitTrack
                     this.Close();
                     
                 }
+                
 
                 bool userFound = false;
                 foreach (User user in User.ActiveUsers)
@@ -112,6 +115,19 @@ namespace FitTrack
             ForgotPassword forgotwin = new ForgotPassword();
             forgotwin.Show();
 
+        }
+        private void DefaultUserWorkouts(User user)
+        {
+
+            var workout1 = new CardioWorkout(new DateTime(2024, 5, 6), "Cardio", "Springtur i parken", TimeSpan.FromMinutes(20), 0, 20);
+            var workout2 = new StrengthWorkout(new DateTime(2024, 5, 7), "Repetitions", "Gym sesh", TimeSpan.FromMinutes(30), 0, 20);
+            
+
+
+
+            user.WorkoutList.Add(workout1);
+            user.WorkoutList.Add(workout2);
+            
         }
 
     }

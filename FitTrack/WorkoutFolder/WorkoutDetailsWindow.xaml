@@ -1,0 +1,44 @@
+﻿<Window x:Class="FitTrack.WorkoutDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Workout Details" Width="400" Height="500">
+    <StackPanel Background="LightGray" HorizontalAlignment="Center">
+        <TextBlock Text="Workout Details" FontSize="20" FontWeight="Bold" Margin="10" Foreground="Crimson" />
+        <Label Content="Date:" />
+        <TextBox Text="{Binding Date}" 
+                 IsReadOnly="True"
+                 x:Name="DateTextBox" />
+        
+        <Label Content="Type:" />
+        <TextBox Text="{Binding Type}" 
+                 IsReadOnly="True"
+                 x:Name="TypeTextBox" />
+        <Label Content="Duration:" />
+        <TextBox Text="{Binding Duration}"
+                 IsReadOnly="True" 
+                 x:Name="DurationTextBox" />
+        <Label Content="Calories:" />
+        <TextBox Text="{Binding Calories}"
+                 IsReadOnly="True"
+                 x:Name="CaloriesTextBox" />
+        <Label Content="Distance:" />
+        <TextBox Text="{Binding Distance}"
+                 IsReadOnly="True" x:Name="DistanceTextBox" />
+
+        <Label Content="Repetitions:" />
+        <TextBox Text="{Binding Repetitions}"
+                 IsReadOnly="True" 
+                 x:Name="RepetitionsTextBox" />
+
+        <Label Content="Notes:" />
+        <TextBox Text="{Binding Notes}" 
+                 IsReadOnly="True"
+                 x:Name="NotesTextBox"
+                 Height="60" />
+
+        <Button Content="Edit" Click="EditButton_Click"  x:Name="EditButton" />
+        <Button Content="Save" Click="SaveButton_Click"  x:Name="SaveButton" IsEnabled="False" />
+        <Button Content="Done" Click="Button_Click" />
+    </StackPanel>
+</Window>
+

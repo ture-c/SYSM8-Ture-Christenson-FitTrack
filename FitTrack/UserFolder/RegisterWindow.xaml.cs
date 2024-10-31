@@ -42,6 +42,7 @@ namespace FitTrack
             {
                 string username = UsernameTextBox.Text;
                 string password = PasswordBox.Password;
+                string confirmPassword = ConfirmPasswordBox.Password;
                 string country = CountryComboBox.SelectedItem?.ToString();
                 string securityQuestion = SecurityQuestionCombobox.SelectedItem?.ToString();
                 string securityAnswer = SecurityAnswerTextBox.Text;
@@ -57,6 +58,13 @@ namespace FitTrack
                     MessageBox.Show("Username already exists. Please choose a different username.");
                     return;
                 }
+
+                if (password != confirmPassword)
+                {
+                    MessageBox.Show("Passwords do not match.");
+                    return;
+                }
+
 
                 User user = new User(username, password, country, securityQuestion, securityAnswer);
                 user.Register(username, password, country, securityQuestion, securityAnswer);
@@ -83,6 +91,13 @@ namespace FitTrack
 
 
 
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
         }
     }
 }
