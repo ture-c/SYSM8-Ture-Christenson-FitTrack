@@ -3,19 +3,20 @@ using System.Windows.Controls;
 using static FitTrack.Person1;
 using static FitTrack.Person1.User;
 using static FitTrack.Person1.AdminUser;
-using static FitTrack.AdminWindow;
+using System.Collections.ObjectModel;
+using System.Xml.Linq;
 namespace FitTrack
 {
-    
+
 
     public partial class MainWindow : Window
     {
+        AdminUser adminUser = new AdminUser("admin", "password", "Sweden", "What is your mother name", "Jane Doe", true);
 
-        AdminUser adminUser = new AdminUser("admin", "password", "Sweden", "What is your mother name", "Jane Doe");
-
+        User testuser = new User("user", "user", "Sweden", "What is your mother name", "Jane Doe");
         public MainWindow()
         {
-             
+            
           
            InitializeComponent();
             
@@ -38,13 +39,20 @@ namespace FitTrack
               
                 if (adminUser.SignIn(username, password))
                 {
+
                     MessageBox.Show("Welcome Admin!");
-                    AdminWindow adminWindow = new AdminWindow(adminUser);
                     WorkoutsWindow workoutwindow = new WorkoutsWindow(adminUser);
-                    adminWindow.Show();
-                    workoutwindow.Show();
+                    workoutwindow.Show(); 
                     this.Close();
                     return;
+                }
+                else if (testuser.SignIn(username, password))
+                {
+                    MessageBox.Show("Login successful!");
+                    WorkoutsWindow workoutwindow = new WorkoutsWindow(testuser);
+                    workoutwindow.Show();
+                    this.Close();
+                    
                 }
 
                 bool userFound = false;
@@ -57,8 +65,9 @@ namespace FitTrack
                         workoutwindow.Show();
                         this.Close();
                         userFound = true;
-                        break; 
+                        break;
                     }
+                    
                 }
 
                 if (!userFound)

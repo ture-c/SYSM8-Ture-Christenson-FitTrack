@@ -71,16 +71,17 @@ namespace FitTrack
 
             MessageBox.Show("User details updated successfully!");
 
-            this.Close();
+            
             WorkoutsWindow win = new WorkoutsWindow(thisUser);
             win.Show();
+            this.Close();
         }   
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
             WorkoutsWindow win = new WorkoutsWindow(thisUser);
             win.Show();
+            this.Close();
         }
 
         private void PasswordBox_PasswordChanged_1(object sender, RoutedEventArgs e)

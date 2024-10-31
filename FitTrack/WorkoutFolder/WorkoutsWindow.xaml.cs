@@ -13,22 +13,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static FitTrack.Person1;
+using static FitTrack.Workout;
 
 
 namespace FitTrack
 {
     public partial class WorkoutsWindow : Window
     {
-        public ObservableCollection<Workout1.Workout> WorkoutList { get; set; }
-
-        private User thisUser;
-
+        // Håller listan av workouts. Updaterar även ui automatiskt efter inmatning.
+        public ObservableCollection<Workout> WorkoutList { get; set; } = new ObservableCollection<Workout>();
+        //Förvarar inloggade användaren(admin eller vanlig).
+        public User thisUser;
+        
+        //Konstruktor som initierar fönstret och dess komponenter.
         public WorkoutsWindow(User user)
         {
             InitializeComponent();
 
-            WorkoutList = new ObservableCollection<Workout1.Workout>();
             this.thisUser = user;
+            //ger listan baserad på vem som är användaren.
+            getWorkouts();
 
             DataContext = this;
         }
@@ -40,12 +44,34 @@ namespace FitTrack
             addworkoutwin.Show();
 
 
-        } 
-
-        
-        private void RemoveWorkout_Click(object sender, RoutedEventArgs e)
+        }
+        //Denna metod kollar om användaren är admin. Och då har den tillgång till alla träningspass. Samt vilken lista som ska användas.
+        private void getWorkouts()
         {
-            var selectedWorkout = workoutDataGrid.SelectedItem as Workout1.Workout;
+            WorkoutList.Clear();  
+
+            if (thisUser is AdminUser adminUser && adminUser.Admin)
+            {
+                foreach (var workout in User.AllWorkouts)
+                {
+                    WorkoutList.Add(workout);
+                }
+            }
+            else
+            {
+                foreach (var workout in thisUser.WorkoutList)
+                {
+                    WorkoutList.Add(workout);
+                }
+            }
+
+            workoutDataGrid.ItemsSource = WorkoutList;
+        }
+
+        //Tar bort vald träningspass.
+        public void RemoveWorkout_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedWorkout = workoutDataGrid.SelectedItem as Workout;
             if (selectedWorkout != null)
             {
                 MessageBoxResult result = MessageBox.Show("Are you sure you want to remove?",
@@ -82,18 +108,22 @@ namespace FitTrack
 
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow win = new MainWindow();
+            win.Show();
             this.Close();
         }
 
-        public void AddWorkoutToList(Workout1.Workout newWorkout)
+        public void AddWorkoutToList(Workout newWorkout)
         {
-            WorkoutList.Add(newWorkout); 
+            WorkoutList.Add(newWorkout);
+
+
         }
     }
-
-
+    
 
 
 
     
+
 }

@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static FitTrack.Workout1;
+using static FitTrack.Workout;
 
 namespace FitTrack
 {
@@ -62,7 +62,7 @@ namespace FitTrack
                 string notes = NotesInput.Text;
 
                 
-                Workout work;
+                Workout work = null;
 
                 if (workoutType == "Cardio")
                 {
@@ -97,10 +97,12 @@ namespace FitTrack
 
                 int calculatedCalories = work.CalculateCaloriesBurned();
                 work.Calories = calculatedCalories;
-
                 parentWindow.AddWorkoutToList(work);
+                parentWindow.thisUser.AddWorkout(work);
+
                 MessageBox.Show("Workout saved successfully.");
                 this.Close();
+                
             }
             catch (Exception ex)
             {

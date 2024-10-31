@@ -8,7 +8,9 @@ using System.Windows;
 using static FitTrack.Person1;
 using System.Diagnostics.Metrics;
 using System.Runtime.ConstrainedExecution;
-using static FitTrack.Workout1;
+using static FitTrack.Workout;
+using static FitTrack.WorkoutsWindow;
+using System.Collections.ObjectModel;
 
 namespace FitTrack
 { 
@@ -27,6 +29,7 @@ namespace FitTrack
 
 
             }
+            
             public virtual bool SignIn(string username, string password)
             {
                 return Username.Equals(username, StringComparison.OrdinalIgnoreCase) && Password == password;
@@ -55,11 +58,20 @@ namespace FitTrack
 
             //Listan av användarer
             public static List<User> ActiveUsers = new List<User>();
-            public List<Workout> Workouts { get; private set; } = new List<Workout>();
+            public static List<Workout> AllWorkouts = new List<Workout>();
+            public List<Workout> WorkoutList { get; private set; } = new List<Workout>();
+
+
 
             public override bool SignIn(string username, string password)
             {
                 return base.SignIn(username, password);
+            }
+
+            public void AddWorkout(Workout workout)
+            {
+                WorkoutList.Add(workout);
+                AllWorkouts.Add(workout); 
             }
 
             public void Register(string username, string password, string country, string securityQuestion, string securityAnswer)
@@ -184,9 +196,6 @@ namespace FitTrack
                     {
                         Password = newPassword;
                         MessageBox.Show("Reset successful!");
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
-
                         return true;
                         
                         
@@ -208,54 +217,31 @@ namespace FitTrack
 
         public class AdminUser : User
         {
-            public AdminUser(string username, string password, string country, string securityQuestion, string securityAnswer)
+            public bool Admin {  get; set; }
+            public AdminUser(string username, string password, string country, string securityQuestion, string securityAnswer, bool admin)
                 : base(username, password, country, securityQuestion, securityAnswer)
             {
-
+                Admin = admin;
             }
 
-            //tar bort en användare från listan över aktiva användare.
-            public void RemoveUser(User user)
-            {
-                if (ActiveUsers.Contains(user))
-                {
-                    ActiveUsers.Remove(user);
-                    MessageBox.Show($"User {user.Username} removed.");
-                }
-                else
-                {
-                    MessageBox.Show("User not found.");
-                }
-            }
-            //Tar bort workouts
-            public void RemoveWorkout(User user, Workout workout)
-            {
-                if (user.Workouts.Contains(workout))
-                {
-                    user.Workouts.Remove(workout);
-                    MessageBox.Show($"Workout '{workout.Type}' removed from user {user.Username}.");
-                }
-                else
-                {
-                    MessageBox.Show("Workout not found.");
-                }
-            }
-
-            public List<User> GetAllUsers()
-            {
-                return ActiveUsers;
-            }
-
-            //metoden hämtar alla träningspass från alla aktiva användare och returnerar dem i en sammanställd lista.
-            public List<Workout> GetAllWorkouts()
+            public List<Workout> ManageAllWorkouts()
             {
                 List<Workout> allWorkouts = new List<Workout>();
-                foreach (var user in ActiveUsers)
+
+                if (Admin)
                 {
-                    allWorkouts.AddRange(user.Workouts); 
+                    foreach (User user in User.ActiveUsers)
+                    {
+                        
+                        allWorkouts.AddRange(user.WorkoutList); 
+                    }
                 }
-                return allWorkouts;
+
+                return allWorkouts; 
             }
         }
     }
-}
+
+
+ }
+    

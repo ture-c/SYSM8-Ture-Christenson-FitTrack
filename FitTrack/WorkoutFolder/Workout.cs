@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace FitTrack
 {
-    public abstract class Workout1
-    {
         public abstract class Workout
         {
             public DateTime Date { get; set; }
@@ -64,6 +62,5 @@ namespace FitTrack
             }
         }
 
-    }
 }
 

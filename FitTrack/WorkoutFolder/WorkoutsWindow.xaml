@@ -72,7 +72,8 @@
 
 
         </WrapPanel>
-        <DataGrid Name="workoutDataGrid" ItemsSource="{Binding WorkoutList}"
+        
+        <DataGrid x:Name="workoutDataGrid" ItemsSource="{Binding WorkoutList}"
                   AutoGenerateColumns="False" Height="400"
                   VerticalAlignment="Center">
             <DataGrid.Columns>
