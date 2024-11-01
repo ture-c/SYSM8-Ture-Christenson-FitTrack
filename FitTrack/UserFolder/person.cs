@@ -13,8 +13,8 @@ using static FitTrack.WorkoutsWindow;
 using System.Collections.ObjectModel;
 
 namespace FitTrack
-{ 
-  public class Person1
+{
+    public class Person1
     {
         public abstract class Person
         {
@@ -30,7 +30,7 @@ namespace FitTrack
 
 
             }
-            
+
             public virtual bool SignIn(string username, string password)
             {
                 return Username.Equals(username, StringComparison.OrdinalIgnoreCase) && Password == password;
@@ -73,7 +73,7 @@ namespace FitTrack
             public void AddWorkout(Workout workout)
             {
                 WorkoutList.Add(workout);
-                AllWorkouts.Add(workout); 
+                AllWorkouts.Add(workout);
             }
 
             public void Register(string username, string password, string country, string securityQuestion, string securityAnswer)
@@ -145,9 +145,9 @@ namespace FitTrack
                     MessageBox.Show("All fields must be filled out.");
                     return false;
                 }
-                
-                    return true;
-                
+
+                return true;
+
             }
 
             //Comboboxlista som används i register och new userwindow. 
@@ -198,9 +198,10 @@ namespace FitTrack
                         MessageBox.Show("Reset successful!");
                         return true;
                     }
+                    
                 }
 
-                    MessageBox.Show("Wrong Username Or Answer.");
+                MessageBox.Show("Wrong Username Or Answer.");
                 return false;
             }
 
@@ -210,7 +211,7 @@ namespace FitTrack
 
         public class AdminUser : User
         {
-            public bool Admin {  get; set; }
+            public bool Admin { get; set; }
             public AdminUser(string username, string password, string country, string securityQuestion, string securityAnswer, bool admin)
                 : base(username, password, country, securityQuestion, securityAnswer)
             {
@@ -219,22 +220,10 @@ namespace FitTrack
 
             public List<Workout> ManageAllWorkouts()
             {
-                List<Workout> allWorkouts = new List<Workout>();
-
-                if (Admin)
-                {
-                    foreach (User user in User.ActiveUsers)
-                    {
-                        
-                        allWorkouts.AddRange(user.WorkoutList); 
-                    }
-                }
-
-                return allWorkouts; 
+                return Admin ? User.AllWorkouts : new List<Workout>();
             }
+
         }
     }
-
-
- }
+}
     

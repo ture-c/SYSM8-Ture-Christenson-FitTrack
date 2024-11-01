@@ -11,17 +11,16 @@ namespace FitTrack
 
     public partial class MainWindow : Window
     {
-        AdminUser adminUser = new AdminUser("admin", "password", "Sweden", "What is your mother name", "Jane Doe", true);
+        User adminUser = new AdminUser("admin", "password", "Sweden", "What is your mother name", "Jane Doe", true);
 
         User testuser = new User("user", "password", "Sweden", "What is your mother name", "Jane Doe");
-
+       
         public MainWindow()
         {
-            
-          
-           InitializeComponent();
+            InitializeComponent();
             DefaultUserWorkouts(testuser);
-
+            User.ActiveUsers.Add(testuser);
+            
         }
 
         public void Register()
@@ -48,15 +47,6 @@ namespace FitTrack
                     this.Close();
                     return;
                 }
-                else if (testuser.SignIn(username, password))
-                {
-                    MessageBox.Show("Login successful!");
-                    WorkoutsWindow workoutwindow = new WorkoutsWindow(testuser);
-                    workoutwindow.Show();
-                    this.Close();
-                    
-                }
-                
 
                 bool userFound = false;
                 foreach (User user in User.ActiveUsers)
@@ -118,16 +108,14 @@ namespace FitTrack
         }
         private void DefaultUserWorkouts(User user)
         {
-
             var workout1 = new CardioWorkout(new DateTime(2024, 5, 6), "Cardio", "Springtur i parken", TimeSpan.FromMinutes(20), 0, 20);
             var workout2 = new StrengthWorkout(new DateTime(2024, 5, 7), "Repetitions", "Gym sesh", TimeSpan.FromMinutes(30), 0, 20);
+            var workout3 = new CardioWorkout(new DateTime(2024, 5, 9), "Cardio", "Indoor walking", TimeSpan.FromMinutes(60), 0, 20);
+
             
-
-
-
-            user.WorkoutList.Add(workout1);
-            user.WorkoutList.Add(workout2);
-            
+            user.AddWorkout(workout1);
+            user.AddWorkout(workout2);
+            user.AddWorkout(workout3);
         }
 
     }

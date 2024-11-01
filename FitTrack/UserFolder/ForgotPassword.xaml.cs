@@ -44,6 +44,7 @@ namespace FitTrack
             if (newPassword != confirmpassword)
             {
                 MessageBox.Show("Passwords do not match.");
+                return;
             }
 
             //Hitta användaren

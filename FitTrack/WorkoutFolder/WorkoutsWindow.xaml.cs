@@ -25,8 +25,9 @@ namespace FitTrack
         public ObservableCollection<Workout> WorkoutList { get; set; } = new ObservableCollection<Workout>();
         //Förvarar inloggade användaren(admin eller vanlig).
         public User thisUser;
-
         
+
+
         public Workout SelectedWorkout
         {
             get { return _selectedWorkout; }
@@ -46,6 +47,9 @@ namespace FitTrack
             this.thisUser = user;
             //ger listan baserad på vem som är användaren.
             getWorkouts();
+            
+
+
 
             DataContext = this;
         }
@@ -67,11 +71,12 @@ namespace FitTrack
         //Denna metod kollar om användaren är admin. Och då har den tillgång till alla träningspass. Samt vilken lista som ska användas.
         private void getWorkouts()
         {
-            WorkoutList.Clear();  
+            WorkoutList.Clear();
 
             if (thisUser is AdminUser adminUser && adminUser.Admin)
             {
-                foreach (var workout in User.AllWorkouts)
+                var allWorkouts = adminUser.ManageAllWorkouts();
+                foreach (var workout in allWorkouts)
                 {
                     WorkoutList.Add(workout);
                 }
@@ -83,8 +88,6 @@ namespace FitTrack
                     WorkoutList.Add(workout);
                 }
             }
-
-            workoutDataGrid.ItemsSource = WorkoutList;
         }
 
         //Tar bort vald träningspass.

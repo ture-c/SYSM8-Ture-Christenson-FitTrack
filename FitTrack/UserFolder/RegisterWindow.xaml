@@ -9,8 +9,8 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Welcome, new user!" FontWeight="Bold" FontFamily="Arial" Foreground="Crimson" FontSize="30" />
-
-            <TextBox x:Name="UsernameTextBox" Text="Username"
+            <Label Content="Username" HorizontalAlignment="Center"/>
+            <TextBox x:Name="UsernameTextBox" 
                      Width="200" Height="20" Foreground="Crimson" BorderBrush="Crimson" />
             <Label Content="Password" HorizontalAlignment="Center"/>
             <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"

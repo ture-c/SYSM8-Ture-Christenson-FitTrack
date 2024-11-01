@@ -23,7 +23,7 @@ namespace FitTrack
         {
             InitializeComponent();
             CountrySelect();
-
+            
 
         }
 
@@ -65,12 +65,13 @@ namespace FitTrack
                     MessageBox.Show("Passwords do not match.");
                     return;
                 }
-                //Se om country, säkerhetsfrågorna är valda.
+                //Se om country, säkerhetsfrågorna är ifyllda/valda.
                 if (string.IsNullOrEmpty(country))
                 {
                     MessageBox.Show("Please select a country.");
                     return;
                 }
+                
 
                 if (string.IsNullOrEmpty(securityQuestion))
                 {
