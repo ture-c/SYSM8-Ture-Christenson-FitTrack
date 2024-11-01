@@ -39,8 +39,6 @@ namespace FitTrack
             }
 
 
-
-
         }
         public class User : Person
         {
@@ -61,7 +59,7 @@ namespace FitTrack
             public static List<User> ActiveUsers = new List<User>();
             public static List<Workout> AllWorkouts = new List<Workout>();
             public List<Workout> WorkoutList { get; private set; } = new List<Workout>();
-
+            
 
 
             public override bool SignIn(string username, string password)
@@ -76,7 +74,15 @@ namespace FitTrack
                 AllWorkouts.Add(workout);
             }
 
-            public void Register(string username, string password, string country, string securityQuestion, string securityAnswer)
+            public ObservableCollection<Workout> WorkoutListID { get; set; } = new ObservableCollection<Workout>();
+
+            public void RemoveWorkout(Workout workout)
+            {
+                WorkoutList.Remove(workout);
+            }
+        
+
+        public void Register(string username, string password, string country, string securityQuestion, string securityAnswer)
             {
                 //Ser om användarnamn redan finns
                 if (ActiveUsers.Any(user => user.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
@@ -96,9 +102,7 @@ namespace FitTrack
 
 
                 }
-
             }
-
             // Ser till så att användaren har fyllt i alla boxar samt fyllt i kriterier som exempelvis lösenordets längd i RegisterWindow och userwindow.
             public bool isFilled(string username, string password, string country)
             {
@@ -220,7 +224,8 @@ namespace FitTrack
 
             public List<Workout> ManageAllWorkouts()
             {
-                return Admin ? User.AllWorkouts : new List<Workout>();
+                
+                return new List<Workout>(AllWorkouts);
             }
 
         }

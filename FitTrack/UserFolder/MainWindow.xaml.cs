@@ -18,9 +18,14 @@ namespace FitTrack
         public MainWindow()
         {
             InitializeComponent();
-            DefaultUserWorkouts(testuser);
-            User.ActiveUsers.Add(testuser);
-            
+
+
+            if (User.ActiveUsers.All(u => u.Username != testuser.Username))
+            {
+                DefaultUserWorkouts(testuser);
+                User.ActiveUsers.Add(testuser);
+            }
+
         }
 
         public void Register()
@@ -108,14 +113,16 @@ namespace FitTrack
         }
         private void DefaultUserWorkouts(User user)
         {
-            var workout1 = new CardioWorkout(new DateTime(2024, 5, 6), "Cardio", "Springtur i parken", TimeSpan.FromMinutes(20), 0, 20);
-            var workout2 = new StrengthWorkout(new DateTime(2024, 5, 7), "Repetitions", "Gym sesh", TimeSpan.FromMinutes(30), 0, 20);
-            var workout3 = new CardioWorkout(new DateTime(2024, 5, 9), "Cardio", "Indoor walking", TimeSpan.FromMinutes(60), 0, 20);
+            if (user.WorkoutList.Count == 0)
+            {
+                var workout1 = new CardioWorkout(new DateTime(2024, 5, 6), "Cardio", "Springtur i parken", TimeSpan.FromMinutes(20), 0, 20);
+                var workout2 = new StrengthWorkout(new DateTime(2024, 5, 7), "Repetitions", "Gym sesh", TimeSpan.FromMinutes(30), 0, 20);
+                var workout3 = new CardioWorkout(new DateTime(2024, 5, 9), "Cardio", "Indoor walking", TimeSpan.FromMinutes(60), 0, 20);
 
-            
-            user.AddWorkout(workout1);
-            user.AddWorkout(workout2);
-            user.AddWorkout(workout3);
+                user.AddWorkout(workout1);
+                user.AddWorkout(workout2);
+                user.AddWorkout(workout3);
+            }
         }
 
     }

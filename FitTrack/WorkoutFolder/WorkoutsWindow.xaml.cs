@@ -75,6 +75,7 @@ namespace FitTrack
 
             if (thisUser is AdminUser adminUser && adminUser.Admin)
             {
+                // Admin kan se och hantera alla användare 
                 var allWorkouts = adminUser.ManageAllWorkouts();
                 foreach (var workout in allWorkouts)
                 {
@@ -83,6 +84,7 @@ namespace FitTrack
             }
             else
             {
+                // Vanliga kam bara se sina egna.
                 foreach (var workout in thisUser.WorkoutList)
                 {
                     WorkoutList.Add(workout);
@@ -94,19 +96,40 @@ namespace FitTrack
         public void RemoveWorkout_Click(object sender, RoutedEventArgs e)
         {
             var selectedWorkout = workoutDataGrid.SelectedItem as Workout;
+
             if (selectedWorkout != null)
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to remove?",
-                     "Confirm Delete", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to remove this workout?", "Confirm Delete", MessageBoxButton.YesNo);
+
                 if (result == MessageBoxResult.Yes)
                 {
+                   
                     WorkoutList.Remove(selectedWorkout);
-                }
-                else { MessageBox.Show("Please select a workout you want to remove"); }
 
+                    
+                    if (thisUser is AdminUser adminUser && adminUser.Admin)
+                    {
+                        
+                        User ownerUser = User.ActiveUsers.FirstOrDefault(user => user.WorkoutList.Contains(selectedWorkout));
+                        if (ownerUser != null)
+                        {
+                           
+                            ownerUser.RemoveWorkout(selectedWorkout);
+                        }
+                    }
+                    else
+                    {
+                        
+                        thisUser.RemoveWorkout(selectedWorkout);
+                    }
+
+                    MessageBox.Show("Workout removed successfully.");
+                }
             }
-            
-            
+            else
+            {
+                MessageBox.Show("Please select a workout you want to remove.");
+            }
         }
 
         private void OpenDetails_Click(object sender, RoutedEventArgs e)

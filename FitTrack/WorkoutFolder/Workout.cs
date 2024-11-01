@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace FitTrack
 {
-        public abstract class Workout
+    public abstract class Workout
+    {
+        public DateTime Date { get; set; }
+        public string Type { get; set; }
+        public string Notes { get; set; }
+        public TimeSpan Duration { get; set; }
+
+        public int Calories { get; set; }
+
+        public Workout(DateTime date, string type, string notes, TimeSpan duration, int calories)
         {
-            public DateTime Date { get; set; }
-            public string Type { get; set; }
-            public string Notes { get; set; }
-            public TimeSpan Duration { get; set; }
-
-            public int Calories { get; set; }
-
-            public Workout(DateTime date, string type, string notes, TimeSpan duration, int calories)
-            {
-                Date = date;
-                Type = type;
-                Notes = notes;
-                Duration = duration;
-                Calories = calories;
-            }
-            public abstract int CalculateCaloriesBurned();
-
+            Date = date;
+            Type = type;
+            Notes = notes;
+            Duration = duration;
+            Calories = calories;
         }
+        public abstract int CalculateCaloriesBurned();
+    }
+
         public class CardioWorkout : Workout
         {
             public int Distance { get; set; }
@@ -62,5 +62,6 @@ namespace FitTrack
             }
         }
 
+    
 }
 
